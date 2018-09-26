@@ -183,4 +183,18 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 根据姓名查询用户数量  -->
+	<select id="checkUserName" parameterType="string" resultType="int">
+		select count(id)
+	  	from user
+	  	where username= #{username}
+	</select>  
+	
+	<!--  -->
+	<select id="selectLogin" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from user
+		where username= #{username} and password = #{password}
+	</select>
 </mapper>
