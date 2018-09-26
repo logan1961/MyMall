@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!-- 扫描@Controller 是要扫描注解的包-->
-	<context:component-scan base-package="com.situ.ssm.controller"/>
+	<context:component-scan base-package="com.me.mall.controller.back"/>
 	
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven/>
@@ -20,7 +20,7 @@
 	 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 路径前缀 -->
-		<property name="prefix" value="/WEB-INF/jsp"></property>
+		<property name="prefix" value="/WEB-INF/back"></property>
 		<!-- 路径后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
