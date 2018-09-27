@@ -7,7 +7,7 @@ public class ServerResponse<T> implements Serializable {
 	private Integer code;
 	//描述信息（主要是给用户看的提示信息）
 	private String msg;
-	//总数量
+	//总数量(layui表格需要)
 	private Integer count;
 	//后台返回给前端的数据object
 	private T data;

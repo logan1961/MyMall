@@ -11,8 +11,13 @@ public class IndexController {
 		return "/index";
 	}
 	
-	@RequestMapping(value="/getWelcomePage")
-	public String getWelcomePage(){
-		return "/welcome";
+	@RequestMapping(value="/getHomePage")
+	public String getHomePage(){
+		return "/mainPage";
+	}
+	
+	@RequestMapping(value="/getTablePage")
+	public String getTablePage(){
+		return "/basic_table";
 	}
 }
