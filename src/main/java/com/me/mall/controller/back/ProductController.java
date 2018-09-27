@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.me.mall.common.ServerResponse;
 import com.me.mall.entity.Product;
 import com.me.mall.service.IProductService;
 
@@ -20,5 +21,17 @@ public class ProductController {
 	@ResponseBody
 	public List<Product> list(){
 		return productService.list(); 
+	}
+	
+	@RequestMapping(value="/getProductsPage")
+	public String getProductsPage(){
+		return "/product/product_list";
+	}
+	
+	@RequestMapping(value="/pageList")
+	@ResponseBody
+	public ServerResponse pageList(Integer page,Integer limit){
+		ServerResponse serverResponse = productService.pageList(page,limit);
+		return serverResponse;
 	}
 }

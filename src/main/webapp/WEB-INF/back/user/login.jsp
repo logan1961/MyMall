@@ -46,6 +46,7 @@
 	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
 	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
+	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
 	<script type="text/javascript">
 		//一般直接写在一个js文件中
 		layui.use(['layer'], function(){
@@ -62,7 +63,7 @@
 			var username = $("#username").val();
 			var password = $("#password").val();
 			// 1.1、用户名不能为空
-			if(username == '' || username == undefined || username == null) {
+			if(util.isNull(username)) {
 				mylayer.errorMsg("用户名不能为空");
 				return;
 			}
@@ -73,7 +74,7 @@
 				return;
 			}
 			//2、密码不能为空
-			if(password == '' || password == undefined || password == null) {
+			if(util.isNull(password)) {
 				mylayer.errorMsg("密码不能为空");
 				return;
 			}
@@ -86,7 +87,7 @@
 				data:$("#login_form").serialize(),
 				success:function(resp) {
 					console.log(resp);
-					if(resp.code == 0){
+					if(resp.code == util.SUCCESS){
 						mylayer.successUrl(resp.msg, "${ctx}/index.action");
 					} else {
 						mylayer.errorMsg(resp.msg);

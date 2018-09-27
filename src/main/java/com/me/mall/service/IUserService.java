@@ -6,4 +6,6 @@ public interface IUserService {
 
 	ServerResponse login(String username, Integer password);
 
+	ServerResponse pageList(Integer page, Integer limit);
+
 }

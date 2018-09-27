@@ -1,9 +1,14 @@
 package com.me.mall.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.me.mall.common.ServerResponse;
+import com.me.mall.entity.Product;
 import com.me.mall.entity.User;
 import com.me.mall.mapper.UserMapper;
 import com.me.mall.service.IUserService;
@@ -26,6 +31,15 @@ public class UserServiceImpl implements IUserService{
 		}
 		user.setPassword("");
 		return ServerResponse.createSuccess("登陆成功",user);
+	}
+
+	@Override
+	public ServerResponse pageList(Integer page, Integer limit) {
+		PageHelper.startPage(page, limit);
+		List<Product> list = userMapper.list();
+		PageInfo pageInfo = new PageInfo(list);
+		Integer count = (int) pageInfo.getTotal();
+		return ServerResponse.createSuccess("查询成功",count,list);
 	}
 
 }

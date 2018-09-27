@@ -1,7 +1,10 @@
 package com.me.mall.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.me.mall.entity.Product;
 import com.me.mall.entity.User;
 
 public interface UserMapper {
@@ -56,4 +59,6 @@ public interface UserMapper {
 	int checkUserName(String username);
 
 	User selectLogin(@Param("username")String username, @Param("password")Integer password);
+
+	List<Product> list();
 }

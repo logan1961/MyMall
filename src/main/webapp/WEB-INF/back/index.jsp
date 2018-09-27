@@ -38,20 +38,19 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
-                                        <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">hAdmin</strong>
+                                        <strong style="margin-left:12px" class="font-bold">  后台管理系统</strong>
                                     </span>
                                 </span>
                             </a>
                         </div>
-                        <div class="logo-element">hAdmin
+                        <div class="logo-element">logan
                         </div>
                     </li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">分类</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="index_v1.html">
+                        <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                         </a>
@@ -59,15 +58,15 @@
                     <li>
                         <a href="#">
                             <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">统计图表</span>
+                            <span class="nav-label">统计信息</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="graph_echarts.html">百度ECharts</a>
+                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">商品信息</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_flot.html">Flot</a>
+                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户信息</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="graph_morris.html">Morris.js</a>
@@ -340,7 +339,7 @@
                 </nav>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe id="J_iframe" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe id="J_iframe" width="100%" height="100%" src="${ctx}/product/getProductsPage.action" frameborder="0" data-id="index_v1.html" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->

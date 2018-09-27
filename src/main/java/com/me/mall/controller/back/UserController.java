@@ -32,4 +32,16 @@ public class UserController {
 		
 		return response;
 	}
+	
+	@RequestMapping(value="/getUserPage")
+	public String getUserPage(){
+		return "/user/user_list";
+	}
+	
+	@RequestMapping(value="/pageList")
+	@ResponseBody
+	public ServerResponse pageList(Integer page,Integer limit){
+		ServerResponse serverResponse = userService.pageList(page,limit);
+		return serverResponse;
+	}
 }
