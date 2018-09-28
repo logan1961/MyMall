@@ -8,30 +8,25 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.me.mall.common.ServerResponse;
-import com.me.mall.entity.Product;
-import com.me.mall.mapper.ProductMapper;
-import com.me.mall.service.IProductService;
+import com.me.mall.entity.Shipping;
+import com.me.mall.mapper.ShippingMapper;
+import com.me.mall.service.IShippingService;
 
 @Service
-public class ProductServiceImpl implements IProductService{
+public class ShippingServiceImpl implements IShippingService{
 	@Autowired
-	private ProductMapper productMapper;
-	
-	@Override
-	public List<Product> list() {
-		return productMapper.list();
-	}
+	private ShippingMapper shippingMapper;
 	
 	/**
 	 * 分页
 	 */
 	@Override
-	public ServerResponse pageList(Integer page, Integer limit,Product product) {
+	public ServerResponse pageList(Integer page, Integer limit,Shipping shipping) {
 		//1.使用PageHelper插件设置分页
 		//PageHelper文档参考github
 		PageHelper.startPage(page,limit);
 		//2.执行查询
-		List<Product> list = productMapper.pageList(product);
+		List<Shipping> list = shippingMapper.pageList(shipping);
 		//使用PageInfo对结果进行包装
 		PageInfo pageInfo = new PageInfo(list);
 		//得到总数
@@ -44,7 +39,7 @@ public class ProductServiceImpl implements IProductService{
 	public ServerResponse deleteById(Integer id) {
 		//删除正确只有一种情况，失败多种情况
 		//如果存在表中存在外键关联，需要添加try-catch
-		int count = productMapper.deleteByPrimaryKey(id);
+		int count = shippingMapper.deleteByPrimaryKey(id);
 		if (count == 1) {
 			return ServerResponse.createSuccess("删除成功");
 		} else {
@@ -57,7 +52,7 @@ public class ProductServiceImpl implements IProductService{
 	public ServerResponse deleteAll(String ids) {
 		String[] idArray = ids.split(",");
 				try {
-					int count = productMapper.deleteAll(idArray);
+					int count = shippingMapper.deleteAll(idArray);
 					if (count == idArray.length) {
 						return ServerResponse.createSuccess("删除成功");
 					} else {

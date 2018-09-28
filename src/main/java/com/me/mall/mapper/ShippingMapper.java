@@ -1,5 +1,7 @@
 package com.me.mall.mapper;
 
+import java.util.List;
+
 import com.me.mall.entity.Shipping;
 
 public interface ShippingMapper {
@@ -50,4 +52,8 @@ public interface ShippingMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Shipping record);
+
+	List<Shipping> pageList(Shipping shipping);
+
+	int deleteAll(String[] idArray);
 }

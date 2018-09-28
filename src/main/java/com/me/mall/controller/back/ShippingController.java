@@ -8,34 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.me.mall.common.ServerResponse;
-import com.me.mall.entity.Product;
-import com.me.mall.service.IProductService;
+import com.me.mall.entity.Shipping;
+import com.me.mall.service.IShippingService;
 
 @Controller
-@RequestMapping(value="/product")
-public class ProductController {
+@RequestMapping(value="/shipping")
+public class ShippingController {
 	@Autowired
-	private IProductService productService;
+	private IShippingService shippingService;
 	
-	/**
-	 * 测试
-	 * @return
-	 */
-	@RequestMapping(value="/list")
-	@ResponseBody
-	public List<Product> list(){
-		return productService.list(); 
-	}
-	
-	@RequestMapping(value="/getProductsPage")
-	public String getProductsPage(){
-		return "/product/product_list";
+	@RequestMapping(value="/getShippingsPage")
+	public String getShippingsPage(){
+		return "/shipping/shipping_list";
 	}
 	
 	@RequestMapping(value="/pageList")
 	@ResponseBody
-	public ServerResponse pageList(Integer page,Integer limit,Product product){
-		ServerResponse serverResponse = productService.pageList(page,limit,product);
+	public ServerResponse pageList(Integer page,Integer limit,Shipping shipping){
+		ServerResponse serverResponse = shippingService.pageList(page,limit,shipping);
 		System.out.println("测试" + serverResponse.getData());
 		return serverResponse;
 	}
@@ -43,14 +33,14 @@ public class ProductController {
 	@RequestMapping(value="/deleteById")
 	@ResponseBody
 	public ServerResponse deleteById(Integer id){
-		ServerResponse serverResponse = productService.deleteById(id);
+		ServerResponse serverResponse = shippingService.deleteById(id);
 		return serverResponse;
 	}
 	
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public ServerResponse deleteAll(String ids){
-		ServerResponse serverResponse = productService.deleteAll(ids);
+		ServerResponse serverResponse = shippingService.deleteAll(ids);
 		return serverResponse;
 	}
 }

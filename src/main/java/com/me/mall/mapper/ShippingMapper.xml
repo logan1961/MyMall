@@ -208,4 +208,18 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 分布展示、查询分页 -->
+  <select id="pageList" parameterType="Shipping" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from shipping
+  	<where>
+  		<if test="name!=null and name!= '' ">
+  			and name like '$%{name}%'
+  		</if>
+  		<if test="subtitle!=null and subtitle!= '' ">
+  			and subtitle like '%${subtitle}%'
+  		</if>
+  	</where>
+  </select>
 </mapper>

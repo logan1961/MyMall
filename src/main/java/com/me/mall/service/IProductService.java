@@ -9,8 +9,10 @@ public interface IProductService {
 
 	List<Product> list();
 
-	ServerResponse pageList(Integer page,Integer limit);
+	ServerResponse pageList(Integer page,Integer limit, Product product);
 
 	ServerResponse deleteById(Integer id);
+
+	ServerResponse deleteAll(String ids);
 
 }

@@ -11,5 +11,15 @@ var util = {
 			} else {
 				return false;
 			}
-		}
+		},
+		//获得选中的id
+		getSelectedIds : function(data) {
+			var idArray = [];// [1,3,4]
+		    for(var i in data){
+		    	idArray.push(data[i].id);
+ 	    }
+		    var ids = idArray.join(","); // "1,3,4"
+		    return ids;
+	 	}
+		
 }

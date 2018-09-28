@@ -11,7 +11,7 @@
 <body>
 	<!-- 表格上方操作按钮 -->
 	<div class="demoTable">
-		商品名称：
+		收货人姓名：
 		<div class="layui-inline">
 			<input type="text" style="width:200px;height:30px" id="searchName">
 		</div>
@@ -41,20 +41,22 @@
 			var table = layui.table;
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/product/pageList.action' //数据接口
+			    ,url: '${ctx}/shipping/pageList.action' //数据接口
 			    ,id:'layUITableId'
 			    ,page: true //开启分页
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
 			      ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-			      ,{field: 'categoryId', title: '分类id', width:80}
-			      ,{field: 'name', title: '商品名称', width:150, sort: true}
-			      ,{field: 'subtitle', title: '商品副标题', width:170} 
-			      ,{field: 'mainImage', title: '产品主图', width: 177}
-			      ,{field: 'price', title: '价格', width: 80, sort: true}
-			      ,{field: 'stock', title: '库存数量', width: 80}
-			      ,{field: 'status', title: '商品状态', width: 135, sort: true}
-			      ,{field: 'createTime', title: '创建时间', width: 135, sort: true}
+			      ,{field: 'user_id', title: '用户id', width:80}
+			      ,{field: 'receiver_name', title: '收货姓名', width:150, sort: true}
+			      ,{field: 'receiver_phone', title: '收货固定电话', width:170} 
+			      ,{field: 'receiver_mobile', title: '收货移动电话', width: 177}
+			      ,{field: 'receiver_province', title: '省份', width: 80, sort: true}
+			      ,{field: 'receiver_city', title: '城市', width: 80}
+			      ,{field: 'receiver_district', title: '区/县', width: 70, sort: true}
+			      ,{field: 'receiver_address', title: '详细地址', width: 135, sort: true}
+			      ,{field: 'receiver_zip', title: '邮编', width: 135, sort: true}
+			      ,{field: 'create_time', title: '创建时间', width: 135, sort: true}
 			      ,{field: 'updateTime', title: '更新时间', width: 135, sort: true}
 			      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 			    ]]
@@ -81,7 +83,7 @@
 		      case 'del':
 		       layer.confirm('确定要删除吗？',function(index){
 		    	   $.ajax({
-		    		   url : '${ctx}/product/deleteById.action',
+		    		   url : '${ctx}/shipping/deleteById.action',
 		    		   data : {"id" : data.id},
 		    		   dataType : 'json',
 		    		   success:function(resp){
@@ -113,7 +115,7 @@
 			          layer.confirm('确定要删除这些数据吗？', function(index){
 			        	  
 				    	  $.ajax({
-				    	  url:"${ctx}/product/deleteAll.action",
+				    	  url:"${ctx}/shipping/deleteAll.action",
 				    	  data:{"ids":ids},
 				    	  dataType:"json",
 				          success:function(resp) {
@@ -131,9 +133,8 @@
 			    ,search: function(){ //按条件搜索
 			    	table.reload('layUITableId',{
 			    		where:{
-			    			name:$('#searchName').val(),
-			    			
-			    			subtitle:$('#searchSubtitle').val()
+			    			name:$("#searchName").val(),
+			    			subtitle:$("#searchSubtitle").val(),
 			    		}
 			    		,page:{
 			    			curr:1//重新从第一页开始
