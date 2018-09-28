@@ -214,12 +214,21 @@
   	select <include refid="Base_Column_List"/>
   	from shipping
   	<where>
-  		<if test="name!=null and name!= '' ">
-  			and name like '$%{name}%'
+  		<if test="receiverName!=null and receiverName!= '' ">
+  			and receiver_name like '%${receiverName}%'
   		</if>
-  		<if test="subtitle!=null and subtitle!= '' ">
-  			and subtitle like '%${subtitle}%'
+  		<if test="receiverProvince!=null and receiverProvince!= '' ">
+  			and receiver_province like '%${receiverProvince}%'
   		</if>
   	</where>
   </select>
+  
+  <!-- 批量删除 -->
+  <delete id="deleteAll">
+  	delete from shipping
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>

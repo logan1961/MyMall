@@ -42,4 +42,29 @@ public class UserServiceImpl implements IUserService{
 		return ServerResponse.createSuccess("查询成功",count,list);
 	}
 
+	@Override
+	public ServerResponse deleteById(Integer id) {
+		int count = userMapper.deleteByPrimaryKey(id);
+		if (count == 1) {
+			return ServerResponse.createSuccess("删除成功");
+		} else {
+			return ServerResponse.createError("删除失败");
+		}
+	}
+
+	@Override
+	public ServerResponse deleteAll(String ids) {
+		String[] idArray = ids.split(",");
+		try {
+			int count = userMapper.deleteAll(idArray);
+			if (count == idArray.length) {
+				return ServerResponse.createSuccess("删除成功");
+			} else {
+				return ServerResponse.createError("删除失败");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("删除失败");
+		}
+	}
+
 }

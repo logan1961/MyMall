@@ -44,4 +44,18 @@ public class UserController {
 		ServerResponse serverResponse = userService.pageList(page,limit);
 		return serverResponse;
 	}
+	
+	@RequestMapping(value="/deleteById")
+	@ResponseBody
+	public ServerResponse deleteById(Integer id){
+		ServerResponse serverResponse = userService.deleteById(id);
+		return serverResponse;
+	}
+	
+	@RequestMapping(value="/deleteAll")
+	@ResponseBody
+	public ServerResponse deleteAll(String ids){
+		ServerResponse serverResponse = userService.deleteAll(ids);
+		return serverResponse;
+	}
 }

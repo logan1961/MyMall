@@ -58,15 +58,21 @@
                     <li>
                         <a href="#">
                             <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">统计信息</span>
+                            <span class="nav-label">信息管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">商品信息</a>
+                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">商品信息管理</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户信息</a>
+                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户信息管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="${ctx}/shipping/getShippingsPage.action">收货地址信息管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="${ctx}/shipping/getShippingPage.action">收获地址信息管理</a>
                             </li>
                         </ul>
                     </li>

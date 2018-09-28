@@ -13,11 +13,11 @@
 	<div class="demoTable">
 		收货人姓名：
 		<div class="layui-inline">
-			<input type="text" style="width:200px;height:30px" id="searchName">
+			<input type="text" style="width:200px;height:30px" id="searchReceiverName">
 		</div>
-		商品副标题：
+		收货省份：
 		<div class="layui-inline">
-			<input type="text" style="width:200px;height:30px" id="searchSubtitle">
+			<input type="text" style="width:200px;height:30px" id="searchReceiverProvince">
 		</div>
 	  	<button class="layui-btn" data-type="search">搜索</button>
 	  	<button class="layui-btn" data-type="deleteAll">批量删除</button>
@@ -47,16 +47,16 @@
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
 			      ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-			      ,{field: 'user_id', title: '用户id', width:80}
-			      ,{field: 'receiver_name', title: '收货姓名', width:150, sort: true}
-			      ,{field: 'receiver_phone', title: '收货固定电话', width:170} 
-			      ,{field: 'receiver_mobile', title: '收货移动电话', width: 177}
-			      ,{field: 'receiver_province', title: '省份', width: 80, sort: true}
-			      ,{field: 'receiver_city', title: '城市', width: 80}
-			      ,{field: 'receiver_district', title: '区/县', width: 70, sort: true}
-			      ,{field: 'receiver_address', title: '详细地址', width: 135, sort: true}
-			      ,{field: 'receiver_zip', title: '邮编', width: 135, sort: true}
-			      ,{field: 'create_time', title: '创建时间', width: 135, sort: true}
+			      ,{field: 'userId', title: '用户id', width:80}
+			      ,{field: 'receiverName', title: '收货姓名', width:150, sort: true}
+			      ,{field: 'receiverPhone', title: '收货固定电话', width:170} 
+			      ,{field: 'receiverMobile', title: '收货移动电话', width: 177}
+			      ,{field: 'receiverProvince', title: '省份', width: 80, sort: true}
+			      ,{field: 'receiverCity', title: '城市', width: 80}
+			      ,{field: 'receiverDistrict', title: '区/县', width: 70, sort: true}
+			      ,{field: 'receiverAddress', title: '详细地址', width: 135, sort: true}
+			      ,{field: 'receiverZip', title: '邮编', width: 135, sort: true}
+			      ,{field: 'createTime', title: '创建时间', width: 135, sort: true}
 			      ,{field: 'updateTime', title: '更新时间', width: 135, sort: true}
 			      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 			    ]]
@@ -133,8 +133,8 @@
 			    ,search: function(){ //按条件搜索
 			    	table.reload('layUITableId',{
 			    		where:{
-			    			name:$("#searchName").val(),
-			    			subtitle:$("#searchSubtitle").val(),
+			    			receiverName:$("#searchReceiverName").val(),
+			    			receiverProvince:$("#searchReceiverProvince").val(),
 			    		}
 			    		,page:{
 			    			curr:1//重新从第一页开始

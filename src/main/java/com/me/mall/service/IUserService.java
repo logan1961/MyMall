@@ -8,4 +8,8 @@ public interface IUserService {
 
 	ServerResponse pageList(Integer page, Integer limit);
 
+	ServerResponse deleteById(Integer id);
+
+	ServerResponse deleteAll(String ids);
+
 }

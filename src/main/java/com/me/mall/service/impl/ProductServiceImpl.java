@@ -56,16 +56,16 @@ public class ProductServiceImpl implements IProductService{
 	@Override
 	public ServerResponse deleteAll(String ids) {
 		String[] idArray = ids.split(",");
-				try {
-					int count = productMapper.deleteAll(idArray);
-					if (count == idArray.length) {
-						return ServerResponse.createSuccess("删除成功");
-					} else {
-						return ServerResponse.createError("删除失败");
-					}
-				} catch (Exception e) {
-					return ServerResponse.createError("删除失败");
-				}
+		try {
+			int count = productMapper.deleteAll(idArray);
+			if (count == idArray.length) {
+				return ServerResponse.createSuccess("删除成功");
+			} else {
+				return ServerResponse.createError("删除失败");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("删除失败");
+		}
 	}
 
 }

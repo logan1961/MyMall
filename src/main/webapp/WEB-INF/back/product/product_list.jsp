@@ -42,10 +42,10 @@
 			table.render({
 			    elem: '#tableId'
 			    ,url: '${ctx}/product/pageList.action' //数据接口
-			    ,id:'layUITableId'
+			    ,id:'layUITableId'//添加容器的id，用于全选等操作
 			    ,page: true //开启分页
 			    ,cols: [[ //表头
-			      {type: 'checkbox', fixed: 'left'}
+			      {type: 'checkbox', fixed: 'left'}//全选
 			      ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
 			      ,{field: 'categoryId', title: '分类id', width:80}
 			      ,{field: 'name', title: '商品名称', width:150, sort: true}

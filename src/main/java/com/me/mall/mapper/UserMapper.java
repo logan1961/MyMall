@@ -61,4 +61,6 @@ public interface UserMapper {
 	User selectLogin(@Param("username")String username, @Param("password")Integer password);
 
 	List<Product> list();
+
+	int deleteAll(String[] idArry);
 }
