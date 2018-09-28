@@ -13,7 +13,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/getHomePage")
 	public String getHomePage(){
-		return "/mainPage";
+		return "/main";
 	}
 	
 	@RequestMapping(value="/getTablePage")

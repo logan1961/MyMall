@@ -17,6 +17,10 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 	
+	/**
+	 * 测试
+	 * @return
+	 */
 	@RequestMapping(value="/list")
 	@ResponseBody
 	public List<Product> list(){
@@ -34,4 +38,12 @@ public class ProductController {
 		ServerResponse serverResponse = productService.pageList(page,limit);
 		return serverResponse;
 	}
+	
+	@RequestMapping(value="/deleteById")
+	@ResponseBody
+	public ServerResponse deleteById(Integer id){
+		ServerResponse serverResponse = productService.deleteById(id);
+		return serverResponse;
+	}
+	
 }

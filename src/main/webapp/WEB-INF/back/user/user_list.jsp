@@ -23,9 +23,9 @@
 			    ,page: true //开启分页
 			    ,cols: [[ //表头
 			      {field: 'id', title: '用户表ID', width:80, sort: true, fixed: 'left'}
-			      ,{field: 'username', title: '用户名', width:80}
-			      ,{field: 'password', title: '用户密码', width:80, sort: true}
-			      ,{field: 'email', title: '电子邮件', width:80} 
+			      ,{field: 'username', title: '用户名', width:180}
+			      ,{field: 'password', title: '用户密码', width:180, sort: true}
+			      ,{field: 'email', title: '电子邮件', width:180} 
 			      ,{field: 'phone', title: '电话', width: 177}
 			      ,{field: 'question', title: '找回密码问题', width: 80, sort: true}
 			      ,{field: 'answer', title: '找回密码答案', width: 80}

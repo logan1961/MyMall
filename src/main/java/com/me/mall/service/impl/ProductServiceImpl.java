@@ -36,4 +36,17 @@ public class ProductServiceImpl implements IProductService{
 		return ServerResponse.createSuccess("查询成功",count,list);
 	}
 
+	@Override
+	public ServerResponse deleteById(Integer id) {
+		//删除正确只有一种情况，失败多种情况
+		//如果存在表中存在外键关联，需要添加try-catch
+		int count = productMapper.deleteByPrimaryKey(id);
+		if (count == 1) {
+			return ServerResponse.createSuccess("删除成功");
+		} else {
+			return ServerResponse.createError("删除失败");
+		}
+		
+	}
+
 }

@@ -11,4 +11,6 @@ public interface IProductService {
 
 	ServerResponse pageList(Integer page,Integer limit);
 
+	ServerResponse deleteById(Integer id);
+
 }
