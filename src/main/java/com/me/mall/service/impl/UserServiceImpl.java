@@ -34,9 +34,9 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public ServerResponse pageList(Integer page, Integer limit) {
+	public ServerResponse pageList(Integer page, Integer limit,User user) {
 		PageHelper.startPage(page, limit);
-		List<Product> list = userMapper.list();
+		List<Product> list = userMapper.pageList(user);
 		PageInfo pageInfo = new PageInfo(list);
 		Integer count = (int) pageInfo.getTotal();
 		return ServerResponse.createSuccess("查询成功",count,list);

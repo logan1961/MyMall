@@ -72,7 +72,7 @@
                                 <a class="J_menuItem" href="${ctx}/shipping/getShippingsPage.action">收货地址信息管理</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="${ctx}/shipping/getShippingPage.action">收获地址信息管理</a>
+                                <a class="J_menuItem" href="${ctx}/shipping/getShippingPage.action">收货地址信息管理</a>
                             </li>
                         </ul>
                     </li>

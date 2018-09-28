@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.me.mall.common.ServerResponse;
+import com.me.mall.entity.User;
 import com.me.mall.service.IUserService;
 
 @Controller
@@ -40,8 +41,8 @@ public class UserController {
 	
 	@RequestMapping(value="/pageList")
 	@ResponseBody
-	public ServerResponse pageList(Integer page,Integer limit){
-		ServerResponse serverResponse = userService.pageList(page,limit);
+	public ServerResponse pageList(Integer page,Integer limit,User user){
+		ServerResponse serverResponse = userService.pageList(page,limit,user);
 		return serverResponse;
 	}
 	

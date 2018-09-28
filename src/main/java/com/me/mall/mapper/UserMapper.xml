@@ -204,6 +204,19 @@
 		from user
 	</select>
 	
+	<!-- 分页展示，条件查询 -->
+	<select id="pageList" parameterType="User" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from user
+		<where>
+			<if test="username!=null and username!='' ">
+				and username like '%${username}%'
+			</if>
+			<if test="role!=null and role!='' ">
+				and role = #{role}
+			</if>
+		</where>
+	</select>
 	<!-- 批量删除 -->
 	<delete id="deleteAll">
 		delete from user
@@ -212,4 +225,5 @@
 		 #{id}
 		</foreach>
 	</delete>
+	
 </mapper>
