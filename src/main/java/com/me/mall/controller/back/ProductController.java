@@ -53,4 +53,9 @@ public class ProductController {
 		ServerResponse serverResponse = productService.deleteAll(ids);
 		return serverResponse;
 	}
+	
+	@RequestMapping(value="/getAddPage")
+	public String getAddPage(){
+		return "/product/product_add";
+	}
 }

@@ -212,7 +212,7 @@
 			<if test="username!=null and username!='' ">
 				and username like '%${username}%'
 			</if>
-			<if test="role!=null and role!='' ">
+			<if test="role!=null ">
 				and role = #{role}
 			</if>
 		</where>
