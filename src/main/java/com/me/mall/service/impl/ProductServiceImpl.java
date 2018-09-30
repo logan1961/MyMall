@@ -68,4 +68,18 @@ public class ProductServiceImpl implements IProductService{
 		}
 	}
 
+	@Override
+	public ServerResponse add(Product product) {
+		int count = productMapper.insert(product);
+		try {
+			if (count == 1) {
+				return ServerResponse.createSuccess("添加成功");
+			} else {
+				return ServerResponse.createError("添加失败");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("添加失败");
+		}
+	}
+
 }

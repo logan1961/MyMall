@@ -58,4 +58,10 @@ public class ProductController {
 	public String getAddPage(){
 		return "/product/product_add";
 	}
+	
+	@RequestMapping(value="add")
+	public ServerResponse add(Product product){
+		ServerResponse serverResponse = productService.add(product);
+		return serverResponse;
+	}
 }

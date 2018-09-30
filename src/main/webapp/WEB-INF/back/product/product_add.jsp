@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="mainForm">
-	<form class="layui-form layui-form-pane" action="">
+	<form id="form_add" class="layui-form layui-form-pane" action="">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品名称</label>
 	    <div class="layui-input-block">
@@ -62,12 +62,11 @@
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品主图</label>
 	    <input type="hidden" name="mainImage" id="mainImage"/>
-	    <div class="layui-input-inline">
-	      <div class="layui-upload-drag" id="mainImg">
-		  	  <i class="layui-icon"></i>
-		  	  <p>点击上传，或将文件拖拽到此处</p>
-		  </div>
-	    </div>
+	    <div class="layui-upload">
+		  <button type="button" class="layui-btn layui-btn-normal" id="chooseImg">选择文件</button>
+		  <button type="button" class="layui-btn" id="uploadImg">开始上传</button>
+		</div>
+		<img style="width:250px;height:250px;marigin-left:50px" class="layui-upload-img" id="mainImg">
 	  </div>
 	  <div class="layui-form-item layui-form-text">
 	    <label class="layui-form-label">商品描述</label>
@@ -75,10 +74,8 @@
 	      <textarea name="detail" placeholder="请输入内容" class="layui-textarea"></textarea>
 	    </div>
 	  </div>
-	  <div class="layui-form-item">
-	    <button class="layui-btn" onclick="submitForm()" lay-filter="demo2">添加</button>
-	  </div>
 	</form>
+	    <button class="layui-btn" onclick="submitForm()" lay-filter="demo2">添加</button>
 	</div>
 	
 	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
@@ -117,14 +114,46 @@
 				}
 			  });
 	      }); 
+	     //选完文件后不自动上传
+	       upload.render({
+	         elem: '#chooseImg'
+	         ,url: '${ctx}/upload/uploadImg.action'
+	         ,auto: false
+	         //,multiple: true
+	         ,before: function(obj){
+			      //上传前预读本地文件示例，不支持ie8
+			      obj.preview(function(index, file, result){
+			        $('#mainImg').attr('src', result); //图片链接（base64）
+			      });
+			    }
+	         ,bindAction: '#uploadImg'
+	         ,done: function(res){
+	        	 console.log(res)
+		      		if(resp.code == util.SUCCESS){
+		      		//给上面隐藏标签填上value值<input type="hidden" name="mainImage" id="mainImage"/>
+		      			$("#mainImage").val(resp.data);
+		      		}
+	         }
+	       });
 		  upload.render({
 	    	elem: '#mainImg'
-	    	,url: '/upload/'
+	    	,url: '${ctx}/upload/uploadImg.action'
+    		,before: function(obj){
+			      //上传前预读本地文件示例，不支持ie8
+			      obj.preview(function(index, file, result){
+			        $('#mainImg').attr('src', result); //图片链接（base64）
+			      });
+			    }
 	    	,done: function(res){
 	      		console.log(res)
+	      		if(resp.code == util.SUCCESS){
+	      		//给上面隐藏标签填上value值<input type="hidden" name="mainImage" id="mainImage"/>
+	      			$("#mainImage").val(resp.data);
+	      		}
 	    	}
 		  });
 		    });
+		  
 		  //加载一级分类下拉框,topCategoryFilter监听select标签
 		   $(function(){
 			  $.ajax({
@@ -141,13 +170,28 @@
 							  html += "<option value='"+ data[i].id +"'>"+data[i].name+"</option>";
 						  }
 						  $("#topCategory").html(html);
+						  //form.render('select'); //刷新select选择框渲染
 					  } else {
 						  mylayer.errorMsg(resp.msg); 
 					  }
 				  }
 			  });
 		  });
-		
+		  //ajax方式提交表单
+		  function submitForm(){
+			  $.ajax({
+				  url : "${ctx}/product/add.action",
+				  type : "post",
+				  dataType : "json",
+				  success : function(resp){
+					  if(resp.code == util.SUCCESS){
+						  mylayer.confirm("添加成功，是否跳转到商品界面?","${ctx}/product/getProductPage.action");
+					  } else {
+						  mylayer.errorMsg(resp.msg);
+					  }
+				  }
+			  })
+		  }
 	</script>
 </body>
 </html>

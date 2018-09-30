@@ -5,20 +5,16 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.me.mall.common.ServerResponse;
-import com.me.mall.service.IUploadService;
 
 @Controller
 @RequestMapping(value="/upload")
 public class UploadController {
-	@Autowired
-	private IUploadService uploadService;
 	
 	@RequestMapping(value="/uploadImg")
 	@ResponseBody
@@ -29,8 +25,8 @@ public class UploadController {
 		String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 		//拼接成最终的随机名xxxxxxx.jpg
 		String fileName = name + "." + extension;
-		//把文件保存到路径G:\myPic
-		String filePath = "G:\\myPic\\" + fileName;
+		//把文件保存到路径G:\pic
+		String filePath = "G:\\pic\\" + fileName;
 		try {
 			file.transferTo(new File(filePath));
 		} catch (IllegalStateException e) {
