@@ -59,8 +59,10 @@ public class ProductController {
 		return "/product/product_add";
 	}
 	
-	@RequestMapping(value="add")
+	@RequestMapping(value="/add")
+	@ResponseBody
 	public ServerResponse add(Product product){
+		System.out.println("商品内容是：" + product);
 		ServerResponse serverResponse = productService.add(product);
 		return serverResponse;
 	}

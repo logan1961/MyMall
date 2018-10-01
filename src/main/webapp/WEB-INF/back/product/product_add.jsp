@@ -61,12 +61,15 @@
 	  </div>
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品主图</label>
+	    <!-- 隐藏的标签，目的是提交表单时将图片的信息传到数据库 -->
 	    <input type="hidden" name="mainImage" id="mainImage"/>
 	    <div class="layui-upload">
-		  <button type="button" class="layui-btn layui-btn-normal" id="chooseImg">选择文件</button>
-		  <button type="button" class="layui-btn" id="uploadImg">开始上传</button>
-		</div>
-		<img style="width:250px;height:250px;marigin-left:50px" class="layui-upload-img" id="mainImg">
+		  <button type="button" class="layui-btn" id="uploadImgBtn">上传图片</button>
+		  <div class="layui-upload-list">
+		    <img style="width:200px;height:200px" class="layui-upload-img" id="mainImg">
+		    <p id="demoText"></p>
+		  </div>
+		</div>   
 	  </div>
 	  <div class="layui-form-item layui-form-text">
 	    <label class="layui-form-label">商品描述</label>
@@ -104,7 +107,7 @@
 						var html ="<option value=''>请选择二级分类</option>" ;
 						var data = resp.data;
 						for(var i= 0; i < data.length; i++){
-							html += "<option value='"+ resp.data[i].id +"'>"+resp.data[i].name+"</option>";
+							html += "<option value='"+ data[i].id +"'>"+ data[i].name +"</option>";
 						}
 						$("#secondCategory").html(html);
 						form.render('select'); //刷新select选择框渲染
@@ -114,45 +117,32 @@
 				}
 			  });
 	      }); 
-	     //选完文件后不自动上传
-	       upload.render({
-	         elem: '#chooseImg'
-	         ,url: '${ctx}/upload/uploadImg.action'
-	         ,auto: false
-	         //,multiple: true
-	         ,before: function(obj){
-			      //上传前预读本地文件示例，不支持ie8
+	       //图片上传
+		  var uploadInst = upload.render({
+			     elem: '#uploadImgBtn'
+			    ,url: '${ctx}/upload/uploadImg.action'
+			    ,before: function(obj){
+			      //预读本地文件示例，不支持ie8
 			      obj.preview(function(index, file, result){
 			        $('#mainImg').attr('src', result); //图片链接（base64）
 			      });
 			    }
-	         ,bindAction: '#uploadImg'
-	         ,done: function(res){
-	        	 console.log(res)
-		      		if(resp.code == util.SUCCESS){
-		      		//给上面隐藏标签填上value值<input type="hidden" name="mainImage" id="mainImage"/>
-		      			$("#mainImage").val(resp.data);
-		      		}
-	         }
-	       });
-		  upload.render({
-	    	elem: '#mainImg'
-	    	,url: '${ctx}/upload/uploadImg.action'
-    		,before: function(obj){
-			      //上传前预读本地文件示例，不支持ie8
-			      obj.preview(function(index, file, result){
-			        $('#mainImg').attr('src', result); //图片链接（base64）
+			    ,done: function(resp){
+			       if(resp.code == util.SUCCESS) {
+			    	   //给这个隐藏标签填上value值<input type="hidden" name="mainImage" id="mainImage"/>
+			    	   $("#mainImage").val(resp.data);
+			       }
+			    }
+			    ,error: function(){
+			      //演示失败状态，并实现重传
+			      var demoText = $('#demoText');
+			      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+			      demoText.find('.demo-reload').on('click', function(){
+			        uploadInst.upload();
 			      });
 			    }
-	    	,done: function(res){
-	      		console.log(res)
-	      		if(resp.code == util.SUCCESS){
-	      		//给上面隐藏标签填上value值<input type="hidden" name="mainImage" id="mainImage"/>
-	      			$("#mainImage").val(resp.data);
-	      		}
-	    	}
-		  });
 		    });
+		  });
 		  
 		  //加载一级分类下拉框,topCategoryFilter监听select标签
 		   $(function(){
@@ -181,11 +171,12 @@
 		  function submitForm(){
 			  $.ajax({
 				  url : "${ctx}/product/add.action",
-				  type : "post",
+				  data : $('#form_add').serialize(),
+				  type : "POST",
 				  dataType : "json",
 				  success : function(resp){
 					  if(resp.code == util.SUCCESS){
-						  mylayer.confirm("添加成功，是否跳转到商品界面?","${ctx}/product/getProductPage.action");
+						  mylayer.confirm("添加成功，是否跳转到商品界面?","${ctx}/product/getProductsPage.action");
 					  } else {
 						  mylayer.errorMsg(resp.msg);
 					  }
