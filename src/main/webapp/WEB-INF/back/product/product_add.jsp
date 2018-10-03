@@ -74,7 +74,7 @@
 	  <div class="layui-form-item layui-form-text">
 	    <label class="layui-form-label">商品描述</label>
 	    <div class="layui-input-block">
-	      <textarea name="detail" placeholder="请输入内容" class="layui-textarea"></textarea>
+	      <textarea id="editor_id" name="detail" style="height:500px" placeholder="请输入内容" class="layui-textarea"></textarea>
 	    </div>
 	  </div>
 	</form>
@@ -85,6 +85,8 @@
 	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
 	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
+	<script type="text/javascript" src="${ctx}/static/lib/kindeditor/kindeditor.js"></script>
+	<script type="text/javascript" src="${ctx}/static/lib/kindeditor/lang/zh_CN.js"></script>
 	<script type="text/javascript">
 		  layui.use(['upload','form'], function() {
 			var form = layui.form;
@@ -183,6 +185,23 @@
 				  }
 			  })
 		  }
+		  
+		  var myKindEditor ;
+          KindEditor.ready(function(K) {
+              var kingEditorParams = {
+                   //指定上传文件参数名称
+                   filePostName  : "file",
+                   //指定上传文件请求的url。
+                   uploadJson : '${ctx}/upload/uploadImgByEditor.action',
+                   //上传类型，分别为image、flash、media、file
+                   dir : "image",
+                   afterBlur: function () { this.sync(); }
+             }
+            var editor = K.editor(kingEditorParams);
+            
+           //富文本编辑器
+           myKindEditor = KindEditor.create('#form_add[name=detail]', kingEditorParams);
+         });
 	</script>
 </body>
 </html>

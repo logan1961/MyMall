@@ -31,6 +31,16 @@
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
+	<script type="text/html" id="statusTpl">
+		{{#  if(d.status == 1) {  }}
+				上架				  
+		{{#  } else {             }}
+				下架	   			  
+		{{#  }                    }}
+	</script>
+	<script type="text/html" id="mainImageTpl">
+		<img src="/pic/{{d.mainImage}}"/>
+	</script>
 
 	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
@@ -50,10 +60,10 @@
 			      ,{field: 'categoryId', title: '分类id', width:80}
 			      ,{field: 'name', title: '商品名称', width:150, sort: true}
 			      ,{field: 'subtitle', title: '商品副标题', width:170} 
-			      ,{field: 'mainImage', title: '产品主图', width: 177}
+			      ,{field: 'mainImage', title: '产品主图',width:135, templet:"#mainImageTpl"}
 			      ,{field: 'price', title: '价格', width: 80, sort: true}
 			      ,{field: 'stock', title: '库存数量', width: 80}
-			      ,{field: 'status', title: '商品状态', width: 135, sort: true}
+			      ,{field: 'status', title: '商品状态', templet:"#statusTpl"}
 			      ,{field: 'createTime', title: '创建时间', width: 135, sort: true}
 			      ,{field: 'updateTime', title: '更新时间', width: 135, sort: true}
 			      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
