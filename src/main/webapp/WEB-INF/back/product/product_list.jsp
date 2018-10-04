@@ -64,7 +64,7 @@
 			      ,{field: 'price', title: '价格', width: 80, sort: true}
 			      ,{field: 'stock', title: '库存数量', width: 80}
 			      ,{field: 'status', title: '商品状态', templet:"#statusTpl"}
-			      ,{field: 'createTime', title: '创建时间', width: 135, sort: true}
+			      ,{field: 'createTime', title: '创建时间', width: 135 , sort: true }
 			      ,{field: 'updateTime', title: '更新时间', width: 135, sort: true}
 			      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 			    ]]
