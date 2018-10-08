@@ -88,4 +88,18 @@ public class ProductServiceImpl implements IProductService{
 		return product;
 	}
 
+	@Override
+	public ServerResponse update(Product product) {
+		int count = productMapper.updateByPrimaryKeySelective(product);
+		try {
+			if (count == 1) {
+				return ServerResponse.createSuccess("修改成功");
+			} else {
+				return ServerResponse.createError("修改失败");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("修改失败");
+		}
+	}
+
 }

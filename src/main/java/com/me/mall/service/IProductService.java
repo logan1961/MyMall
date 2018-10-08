@@ -19,4 +19,6 @@ public interface IProductService {
 
 	Product findById(Integer id);
 
+	ServerResponse update(Product product);
+
 }

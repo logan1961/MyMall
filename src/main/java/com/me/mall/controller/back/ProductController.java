@@ -97,15 +97,23 @@ public class ProductController {
 	 * 获得修改界面
 	 * @return
 	 */
-	@RequestMapping(value="/getUpdatePage")
-	public String getUpdatePage(){
-		return "/product/product_update";
-	}
-	
 	@RequestMapping(value="/toUpdate")
 	public String toUpdate(Integer id,Model model){
+		System.out.println("操作的id是" + id);
 		Product product = productService.findById(id);
 		model.addAttribute("product",product);
 		return "/product/product_update";
+	}
+	
+	/**
+	 * 修改
+	 * @return
+	 */
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public ServerResponse update(Product product){
+		System.out.println("修改的内容是" + product);
+		ServerResponse serverResponse = productService.update(product);
+		return serverResponse;
 	}
 }

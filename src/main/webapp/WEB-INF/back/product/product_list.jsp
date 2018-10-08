@@ -92,7 +92,7 @@
 		        layer.msg('当前id：' + data.id);
 		      break;
 		      case 'edit':
-		    	  location.href = "${ctx}/product/toUpdate.action";
+		    	  location.href = "${ctx}/product/toUpdate.action?id=" + data.id + " ";
 		      break;
 		      case 'del':
 		       layer.confirm('确定要删除吗？',function(index){
