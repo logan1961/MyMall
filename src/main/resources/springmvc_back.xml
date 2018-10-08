@@ -11,7 +11,7 @@
 	<context:component-scan base-package="com.me.mall.controller.back"/>
 	
 	<!-- 注解驱动 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven conversion-service="consersionServiceFactoryBean"/>
 	
 	<!-- 视图解析器
 		如果Controller中书写的是视图的逻辑名，这个视图解析器必须要配置。
@@ -32,5 +32,16 @@
 	   <property name="maxUploadSize">
 	     <value>#{10*1024*1024}</value>
 	   </property>
+	</bean>
+	
+	<!-- SpringMVC日期处理 -->
+	<!-- 配置Converter转换器 转换工厂 -->
+	<bean id="consersionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <!--配置多个转换器  -->
+	    <property name="converters">
+	        <list>
+	           <bean class="com.me.mall.conversion.DateConverter"/>
+	        </list>
+	    </property>
 	</bean>
 </beans>

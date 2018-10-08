@@ -17,4 +17,6 @@ public interface IProductService {
 
 	ServerResponse add(Product product);
 
+	Product findById(Integer id);
+
 }

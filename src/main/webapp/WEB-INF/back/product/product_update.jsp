@@ -19,13 +19,13 @@
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品名称</label>
 	    <div class="layui-input-block">
-	      <input type="text" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+	      <input type="text" name="name" autocomplete="off" placeholder="请输入标题" value="${product.name }" class="layui-input">
 	    </div>
 	  </div>
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品副标题</label>
 	    <div class="layui-input-block">
-	      <input type="text" name="subtitle" autocomplete="off" placeholder="请输入商品副标题" class="layui-input">
+	      <input type="text" name="subtitle" autocomplete="off" placeholder="请输入商品副标题" value="${product.subtitle }" class="layui-input">
 	    </div>
 	  </div>
 	  <div class="layui-form-item">
@@ -43,13 +43,13 @@
 	   <div class="layui-form-item">
 	    <label class="layui-form-label">价格</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="price" lay-verify="required" placeholder="请输入商品价格" autocomplete="off" class="layui-input">
+	      <input type="text" name="price" lay-verify="required" placeholder="请输入商品价格" value="${product.price }" autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">商品库存</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="stock" lay-verify="required" placeholder="请输入商品库存" autocomplete="off" class="layui-input">
+	      <input type="text" name="stock" lay-verify="required" placeholder="请输入商品库存" value="${product.stock }" autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  <div class="layui-form-item" pane="">
@@ -91,8 +91,6 @@
 		  layui.use(['upload','form'], function() {
 			var form = layui.form;
 			var upload = layui.upload; 
-			
-			form.render('select'); //刷新select选择框渲染
 		  //分类下拉框
 		  //监听select选择
 		  //下拉框选中时触发，回调函数返回一个object参数，携带两个成员
@@ -164,6 +162,7 @@
 							  html += "<option value='"+ data[i].id +"'>"+data[i].name+"</option>";
 						  }
 						  $("#topCategory").html(html);
+						  //form.render('select'); //刷新select选择框渲染
 					  } else {
 						  mylayer.errorMsg(resp.msg); 
 					  }

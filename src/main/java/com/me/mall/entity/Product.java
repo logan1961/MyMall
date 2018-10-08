@@ -96,7 +96,7 @@ public class Product {
      *
      * @mbggenerated
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
@@ -105,7 +105,7 @@ public class Product {
      *
      * @mbggenerated
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /**
@@ -387,7 +387,7 @@ public class Product {
      *
      * @mbggenerated
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" , timezone = "GMT+08")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = "GMT+08")
     public Date getCreateTime() {
         return createTime;
     }
@@ -412,7 +412,7 @@ public class Product {
      *
      * @mbggenerated
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" , timezone = "GMT+08")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = "GMT+08")
     public Date getUpdateTime() {
         return updateTime;
     }

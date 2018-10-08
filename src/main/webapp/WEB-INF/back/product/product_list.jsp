@@ -19,6 +19,10 @@
 		<div class="layui-inline">
 			<input type="text" style="width:200px;height:30px" id="searchSubtitle">
 		</div>
+		创建日期：
+		<div class="layui-inline">
+			<input type="text" style="width:200px;height:30px" id="searchDateTime">
+		</div>
 	  	<button class="layui-btn" data-type="search">搜索</button>
 	  	<button class="layui-btn" data-type="deleteAll">批量删除</button>
 	  	<button class="layui-btn" data-type="add">添加</button>
@@ -47,8 +51,16 @@
 	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
 	<script type="text/javascript">
-		layui.use('table', function() {
+		layui.use(['table','laydate'], function() {
 			var table = layui.table;
+			var laydate = layui.laydate;
+			
+			//执行一个laydate实例
+			//年月选择器
+			laydate.render({
+			  elem: '#searchDateTime'
+			  ,type: 'month'
+			});
 			table.render({
 			    elem: '#tableId'
 			    ,url: '${ctx}/product/pageList.action' //数据接口
@@ -63,9 +75,9 @@
 			      ,{field: 'mainImage', title: '产品主图',width:135, templet:"#mainImageTpl"}
 			      ,{field: 'price', title: '价格', width: 80, sort: true}
 			      ,{field: 'stock', title: '库存数量', width: 80}
-			      ,{field: 'status', title: '商品状态', templet:"#statusTpl"}
-			      ,{field: 'createTime', title: '创建时间', width: 135 , sort: true }
-			      ,{field: 'updateTime', title: '更新时间', width: 135, sort: true}
+			      ,{field: 'status', title: '商品状态', width:80, templet:"#statusTpl"}
+			      ,{field: 'createTime', title: '创建时间', width: 160 , sort: true }
+			      ,{field: 'updateTime', title: '更新时间', width: 160, sort: true}
 			      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 			    ]]
 			  });		
@@ -80,13 +92,7 @@
 		        layer.msg('当前id：' + data.id);
 		      break;
 		      case 'edit':
-		        if(data.length === 0){
-		          layer.msg('请选择一行');
-		        } else if(data.length > 1){
-		          layer.msg('只能同时编辑一个');
-		        } else {
-		          layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
-		        }
+		    	  location.href = "${ctx}/product/toUpdate.action";
 		      break;
 		      case 'del':
 		       layer.confirm('确定要删除吗？',function(index){
@@ -142,8 +148,8 @@
 		    	table.reload('layUITableId',{
 		    		where:{
 		    			name:$('#searchName').val(),
-		    			
-		    			subtitle:$('#searchSubtitle').val()
+		    			subtitle:$('#searchSubtitle').val(),
+		    			createTime:$('#searchDateTime').val()
 		    		}
 		    		,page:{
 		    			curr:1//重新从第一页开始

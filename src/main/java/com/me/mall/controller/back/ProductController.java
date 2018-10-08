@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,11 +28,22 @@ public class ProductController {
 		return productService.list(); 
 	}
 	
+	/**
+	 * 获得商品展示页面
+	 * @return
+	 */
 	@RequestMapping(value="/getProductsPage")
 	public String getProductsPage(){
 		return "/product/product_list";
 	}
 	
+	/**
+	 * 商品分页
+	 * @param page
+	 * @param limit
+	 * @param product
+	 * @return
+	 */
 	@RequestMapping(value="/pageList")
 	@ResponseBody
 	public ServerResponse pageList(Integer page,Integer limit,Product product){
@@ -47,6 +59,11 @@ public class ProductController {
 		return serverResponse;
 	}
 	
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public ServerResponse deleteAll(String ids){
@@ -54,16 +71,41 @@ public class ProductController {
 		return serverResponse;
 	}
 	
+	/**
+	 * 获得添加页面
+	 * @return
+	 */
 	@RequestMapping(value="/getAddPage")
 	public String getAddPage(){
 		return "/product/product_add";
 	}
 	
+	/**
+	 * 商品信息添加
+	 * @param product
+	 * @return
+	 */
 	@RequestMapping(value="/add")
 	@ResponseBody
 	public ServerResponse add(Product product){
 		System.out.println("商品内容是：" + product);
 		ServerResponse serverResponse = productService.add(product);
 		return serverResponse;
+	}
+	
+	/**
+	 * 获得修改界面
+	 * @return
+	 */
+	@RequestMapping(value="/getUpdatePage")
+	public String getUpdatePage(){
+		return "/product/product_update";
+	}
+	
+	@RequestMapping(value="/toUpdate")
+	public String toUpdate(Integer id,Model model){
+		Product product = productService.findById(id);
+		model.addAttribute("product",product);
+		return "/product/product_update";
 	}
 }
