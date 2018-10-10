@@ -56,4 +56,7 @@ public interface CategoryMapper {
 	List<Category> selectTopCategory();
 
 	List<Category> selectSecondCategory(Integer topCategoryId);
+
+	List<Category> selectSecondCategoryList();
+
 }
