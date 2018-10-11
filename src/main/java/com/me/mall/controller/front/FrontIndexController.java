@@ -23,6 +23,7 @@ public class FrontIndexController {
 		model.addAttribute("topCategoryList",topCategoryList);
 		//查询出商品二级分类
 		List<Category> secondCategoryList = categoryService.selectSecondCategoryList();
+		System.out.println("测试二级分类" + secondCategoryList);
 		//添加到域对象
 		model.addAttribute("secondCategoryList",secondCategoryList);
 		return "/index";

@@ -18,8 +18,10 @@ public class FrontProductController {
 	public String getProductDetailPage(Integer productId,Model model){
 		//展示商品的详情
 		Product product = productService.findById(productId);
+		System.out.println("该商品为：" + product);
 		//添加到域对象
 		model.addAttribute("product",product);
 		return "/product/product_detail";
 	}
+	
 }

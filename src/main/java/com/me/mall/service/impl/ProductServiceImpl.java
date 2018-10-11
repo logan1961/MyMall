@@ -84,8 +84,8 @@ public class ProductServiceImpl implements IProductService{
 
 	@Override
 	public Product findById(Integer id) {
-		Product product = productMapper.selectByPrimaryKey(id);
-		return product;
+		return productMapper.selectByPrimaryKey(id);
+		
 	}
 
 	@Override
