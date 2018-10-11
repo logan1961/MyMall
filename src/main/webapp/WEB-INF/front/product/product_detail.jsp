@@ -100,7 +100,7 @@
 			<div id="displayCon" class=" box1200 clear">
 				<div id="displayConBook">
 					<div id="showbox">
-					  <img src="/pic/${product.mainImage}" width="158" height="116" />
+					  <img width="240" height="286" src="/pic/${product.mainImage}" />
 					  <img src="${ctx}/static/front/img/ebookLeft.jpg" width="240" height="286" />
 					  
 					</div><!--展示图片盒子-->
@@ -109,9 +109,6 @@
 					  <a href="javascript:void(0);" id="showlast"> < </a>
 					  <a href="javascript:void(0);" id="shownext"> > </a>
 					</p>
-					<div class="bianma">
-					商品编码：11950959
-					</div>
 				</div>
 				
 				<div id="displayConShop">
@@ -151,7 +148,6 @@
 							加入购物车
 						</div>
 					</div>
-					<div class="tishi">温馨提示：支持7天无理由退货</div>
 				</div>
 			</div>
 		</div>
