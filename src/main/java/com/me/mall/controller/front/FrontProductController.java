@@ -14,11 +14,21 @@ public class FrontProductController {
 	@Autowired
 	private IProductService productService;
 	
+	@RequestMapping("/getProductListPage.shtml")
+	public String getProductListPage(){
+		return "";
+	}
+	
+	/**
+	 * 得到商品详情界面
+	 * @param productId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/getProductDetailPage.shtml")
 	public String getProductDetailPage(Integer productId,Model model){
 		//展示商品的详情
 		Product product = productService.findById(productId);
-		System.out.println("该商品为：" + product);
 		//添加到域对象
 		model.addAttribute("product",product);
 		return "/product/product_detail";

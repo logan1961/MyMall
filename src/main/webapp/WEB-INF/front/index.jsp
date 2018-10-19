@@ -3,2025 +3,684 @@
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
-		<link rel="icon" href="${ctx}/static/front/img/title.ico" type="image/x-icon">
-		<title>首页</title>
-		<!--引入公共样式-->
-		<link rel="stylesheet" type="text/css" href="${ctx}/static/front/css/public.css"/>
-		<!--引入重置样式-->
-		<link rel="stylesheet" type="text/css" href="${ctx}/static/front/css/reset.css"/>
-		<!--引入主页内容样式-->
-		<link rel="stylesheet" type="text/css" href="${ctx}/static/front/css/index.css"/>
-		<!--jquery引入-->
-		<script src="${ctx}/static/lib/jquery/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
-		<!--主页js   index引入-->
-		<script src="${ctx}/static/front/js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${ctx}/static/front/js/tyslide.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${ctx}/static/front/js/webSite.js" type="text/javascript" charset="utf-8"></script>
+		<title>乐购商城</title>
+		<link rel="stylesheet" href="${ctx}/static/front/CSS/index_style.css" />
 	</head>
+	<script src="${ctx}/static/front/JS/jquery.js" type="text/javascript" charset="utf-8"></script>
+
 	<body>
-		<!--领券中心-->
-		<div id="ticket" class="clear">
-			<div id="ticket_title" class="left">
-				<div id="ticket_title_one">
-					
+		<!-----------------------1.top-------------------->
+		<div class="bg_color">
+			<div class="top_center">
+				<div class="left">
+					<span class="wel">
+						欢迎来到乐购商城！
+					</span>
 				</div>
-				<div id="ticket_title_two">
-					<div id="ticket_title_two_min"  class="bookDisnone"></div>
+				<div class="right">
+					<ul>
+						<li><a class="login" href="login.html" target="_blank">请登录</a></li>
+						<li><a href="register.html" target="_blank">快速注册</a></li>
+						<li><a class="collect" href="">我的收藏</a></li>
+						<li><a class="indent" href="">我的订单</a></li>
+						<li><a class="phone" href="">手机靓淘</a></li>
+						<li><a href="">我的积分</a></li>
+						<li><a href="">我的评价</a></li>
+					</ul>
 				</div>
-				<div id="ticket_title_three" >
-					
-				</div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
-		<!--搜索栏显示-->
-		<div id="serch_top">
-			<div class="box1200">
-				<div class="serch_top_left left">
-					logo
+		<!-----------------------2.logo-------------------->
+		<div class="logo_center">
+			<div class="left">
+				<img class="logo_img" src="${ctx}/static/front/img/LOGO.png" />
+			</div>
+			<div class="center">
+				<input class="btn1" type="text" value="洗面奶" />
+				<input class="btn2" type="button" value="搜索" />
+				<ul class="nav">
+					<li><a href="" style="color: pink;">保湿 | </a></li>
+					<li><a href="">面膜 | </a></li>
+					<li><a href="">洗面奶 | </a></li>
+					<li><a href="">补水 | </a></li>
+					<li><a href="">香水 | </a></li>
+					<li><a href="">眼霜 | </a></li>
+					<li><a href="">口红 | </a></li>
+					<li><a href="">护肤套装 | </a></li>
+					<li><a href="">BB霜 | </a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="car">
+					<a class="car_pic" href="cart.html" target="_blank">去购物车结算</a>
 				</div>
-				<form id="serch_top_form" action="#" method="post" >
-					<input id="serch_top_text" type="text" name="serch_top_text" placeholder="创意文具" />
-					<input id="serch_top_sub" type="button" value=""/>
-				</form>
+				<div class="narrow"></div>
 			</div>
 		</div>
-		<!--楼层效果-->
-		<div id="floor" class="bookDisnone">
-			<ul id="floor_con" class="floormin">
-				<li id="floor_textbook">图书</li>
-				<li id="floor_cloth">服装</li>
-				<li id="floor_sport">户外</li>
-				<li id="floor_children">童装</li>
-				<li id="floor_household">家居</li>
-				<li id="floor_generalize">推广</li>
-				<li id="floor_top">顶部</li>
+		<!-----------------------3.导航栏-------------------->
+		<div class="big_menu">
+			<div class="menu">
+				<ul class="menu_ul">
+					<li>
+						<a class="current" href="">
+							商城首页
+						</a>
+					</li>
+					<li>
+						<a href="">
+							美妆商城
+						</a>
+					</li>
+					<li>
+						<a href="">
+							服装运动
+						</a>
+					</li>
+					<li>
+						<a href="">
+							家电数码
+						</a>
+					</li>
+					<li>
+						<a href="">
+							家装家纺
+						</a>
+					</li>
+					<li>
+						<a href="">
+							淘遍美食
+						</a>
+					</li>
+					<li>
+						<a href="">
+							国际轻奢
+						</a>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+			</div>
+		</div>
+		<!-----------------------4.广告区-------------------->
+		<div class="banner_box">
+			<img class="banner" src="${ctx}/static/front/img/tu9.png" />
+			<img  class="banner" src="${ctx}/static/front/img/tu10.png"/>
+			<img class="banner"  src="${ctx}/static/front/img/tu11.png"/>
+			<img class="banner"  src="${ctx}/static/front/img/tu8.png"/>
+			<div class="banner_center">
+				<div class="nav_left">
+					<c:forEach items="${topCategoryList}" var="topCategory">
+						<span>
+							${topCategory.name }
+						</span>
+						<c:forEach items="${secondCategoryList}" var="secondCategory">
+							<c:if test="${secondCategory.parentId == topCategory.id}">
+								<p>
+									<a href="">${secondCategory.name}</a>
+								</p>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
+				</div>
+				<div class="nav_right">
+					<div class="nav_top">
+						<img src="${ctx}/static/front/img/vip.png" />
+						<p>主人好！欢迎来逛靓淘~</p>
+						<input type="button" value="会员中心" />
+					</div>
+					<div class="nav_down">
+						<h2>包治百病</h2>
+						<h3>17新款汇</h3>
+						<img src="${ctx}/static/front/img/bag.png" />
+					</div>
+				</div>
+			</div>
+			<ul class="circle">
+				<li class="current"></li>
+				<li></li>
+				<li></li>
+				<li></li>
 			</ul>
+			<div class="left_fix">
+				<a class="fix_a">
+						购<br />
+						物<br />
+						车
+					</a>
+				<div style="background-image: url(${ctx}/static/front/img/heart2.png); background-repeat: no-repeat; background-position: center 0;">
+
+				</div>
+				<div style="background-image: url(${ctx}/static/front/img/shoucang.png); background-repeat: no-repeat; background-position: center 0;">
+
+				</div>
+				<div style="background-image: url(${ctx}/static/front/img/time.png); background-repeat: no-repeat; background-position: center 0;">
+
+				</div>
+				<div style="background-image: url(${ctx}/static/front/img/advice.png); background-repeat: no-repeat; border-bottom: 1px solid gray; background-position: center 0; ">
+
+				</div>
+				<div style="background-image: url(${ctx}/static/front/img/top.png);background-repeat: no-repeat; background-position: center 10%;
+					height: 50px;color: white;float: left; padding-top: 20px; text-align: center; ">
+					TOP
+				</div>
+			</div>
 		</div>
-		
-		<!--顶部-->
-		<div id="top"  class="box ">
-			<div class="box1200 clear">
-				<p id="topleft" class="left">legochina.cn</p>
-				<p id="topright" class="right">
-					<span class="topspan">欢迎光临<a class="reda" href="#">乐购</a>，请</span>
-					<a class="graya" href="enter.html">登录</a>
-					<span class="topspan">\</span>
-					<a class="reda" href="login.html">注册</a>
+		<!-----------------------5.品牌选择区-------------------->
+		<div class="select_Brand">
+			<div class="select_title">
+				<ul>
+					<li>推荐品牌</li>
+					<li>独家品牌</li>
+					<li>欧美品牌</li>
+					<li>国货品牌</li>
+				</ul>
+				<img class="brand_nav" src="${ctx}/static/front/img/43.png" />
+			</div>
+			<div class="brand">
+				<div class="left">
+					<img src="img/41.png" />
+				</div>
+				<div class="brand_bottom_right">
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/1.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>美加净</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/2.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>李医生</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/3.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>自然堂</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/4.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>佳洁士</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/32.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>镖旗男装</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/33.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>艺元素</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/5.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>泊美</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/6.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>赤道</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/7.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>欧珀莱</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/8.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>玉兰油</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/9.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>丁家宜</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/11.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>露得清</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/12.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>宝洁</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/35.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>波斯兰迪</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/14.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>水芝澳</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/51.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>傲慢季节</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/47.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>丹菲诗</p>
+						</div>
+					</a>
+					<a href="">
+						<div style="background-image: url(${ctx}/static/front/img/38.png); background-repeat: no-repeat; background-position: center center;color: #808080; text-align: center; ">
+							<p>奥利斯</p>
+						</div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+		<!-----------------------6.抢购区-------------------->
+		<div class="panic_Buying">
+			<div class="box_1">
+				<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;" >
+					限时快抢
 				</p>
 			</div>
-			
-		</div>
-		<!--导航栏-->
-		<div id="navmax" class="box1200 clear">
-			<div id="logo">
-				<img src="${ctx}/static/front/img/LOGO.jpg"/>
+			<div class="box_2">
+				<div class="box2_1">
+					<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;">
+						1元抢好货
+					</p>
+					<p style="font-size: 12px; margin-top: 8px; margin-left: 10px;color: #808080;">
+						整点拼手速
+					</p>
+				</div>
+				<div class="box2_2">
+					<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;">
+						0.01抽好运
+					</p>
+					<p style="font-size: 12px; margin-top: 8px; margin-left: 10px;color: #808080;">
+						一分钱幸运礼遇
+					</p>
+				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="box1200 clear h30" >
-				<form id="navmaxform" action="#" method="post" >
-					<input id="navmaxtext" type="text" name="text" placeholder="创意文具" />
-					<input id="navmaxsub" type="button" value=""/>
-				</form>
-				<div id="navmaxshop" class="clear">
-					<div id="shopminleft">
-						<a href="shopingcar.html">购物车</a>
-					</div>
-					<div id="shopminright">
-						我的订单
-					</div>
+			<div class="box_3">
+				<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;" >
+					团购特卖
+				</p>
+				<p style="font-size: 12px; margin-top: 8px; margin-left: 10px;color: #808080;">
+					风格大牌春季新品<span style="color: #f41443; font-size: 12px;" >10点上新</span>
+				</p>
+			</div>
+			<div class="box_4">
+				<div class="box4_1">
+					<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;">
+						品牌团
+					</p>
+				</div>
+				<div class="box4_2">
+					<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;">
+						入库质检
+					</p>
+					<p style="font-size: 12px; margin-top: 8px; margin-left: 10px;color: #f41443;">
+						精选好货 劣一赔三
+					</p>
 				</div>
 			</div>
-			<ul id="navmaxcon" class="clear">
-				<li>图书</li>
-				<li>电子书</li>
-				<li>原创文学</li>
-				<li>服装</li>
-				<li>运动户外</li>
-				<li>孕婴童</li>
-				<li>家具</li>
-				<li>创意文具</li>
-				<li>地方特产</li>
-				<li><a href="product_list.html">商品列表</a></li>
-				<li><a href="VIP.html">会员中心</a></li>
+			<div class="box_5">
+				<p style="margin-top: 34px; margin-left: 10px; font-size: 15px;" >
+					美妆团
+				</p>
+				<p style="margin-top: 8px; margin-left: 10px;" >
+					超值大牌 折扣减免
+				</p>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<!-----------------------7.红人穿搭区-------------------->
+		<div class="person_demo">
+			<div class="person_demo_title">
+				<p class="demo_p">红人穿搭</p>
+			</div>
+			<div class="demo_box">
+
+				<a href="">
+					<div class="box1"></div>
+				</a>
+				<a href="">
+					<div class="box2"></div>
+				</a>
+				<a href="">
+					<div class="box3"></div>
+				</a>
+				<a href="">
+					<div class="box4"></div>
+				</a>
+				<a href="">
+					<div class="box5"></div>
+				</a>
+				<div class="clearfix">
+
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<!-----------------------8.广告条-------------------->
+		<a href="">
+			<div class="ad"></div>
+		</a>
+		<!-----------------------9.靓淘服装区-------------------->
+		<div class="cloth">
+			<div class="c_title">
+				<ul>
+					<li style="font-size: 16px;" >靓淘服饰</li>
+					<li class="hot_li">&nbsp;&nbsp;&nbsp;热门搜索：</li>
+					<li><a href="">卫衣 |</a></li>
+					<li><a href="">风衣 |</a></li>
+					<li><a href="">连衣裙 |</a></li>
+					<li><a href="">阔腿裤 |</a></li>
+					<li><a href="">小脚裤 |</a></li>
+					<li><a href="">牛仔裤 |</a></li>
+					<a class="all_a">
+						查看全部&nbsp;&gt;
+					</a>
+				</ul>
+			</div>
+			<div class="left">
+				<p class="bb_p">大牌新品折扣&nbsp;&gt;</p>
+				<div class="pink_box">
+					<p class="c_p1">牛仔裤潮流趋势</p>
+					<p class="c_p2">女装春夏新品5折</p>
+				</div>
+			</div>
+			<div class="right">
+				<div class="big">
+					<h1 style="font-size: 20px; margin-top: 18px; margin-left: 20px;color: rgb(51,51,51);" >
+						条纹套装新品首发
+					</h1>
+					<h3 style="color: #808080;margin-top: 10px;margin-left: 20px;">
+						立即预约享好礼
+					</h3>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						夏季新品 预约爆款
+					</h6>
+					<p style="margin-top: 60px;margin-left: 25px; ">
+						<a style=" padding: 5px 10px 5px 10px; border: 1px solid rgb(51,51,51);color: rgb(51,51,51);" href="">
+							立即查看
+						</a>
+					</p>
+				</div>
+				<div class="small1">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						雪纺当道
+					</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						一看百变雪纺风采
+					</h6>
+				</div>
+				<div class="small2">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						帅气黑色连体裤</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						精致细节利落休闲
+					</h6>
+				</div>
+				<div class="small3">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						早春时尚新条纹
+					</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						春季新款条纹尖货
+					</h6>
+				</div>
+				<div class="small4">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						春夏型牛仔衬衫
+					</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						OL的完美新姿
+					</h6>
+				</div>
+				<div class="small5">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						Amii工作装
+					</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						百搭显瘦实穿时尚
+					</h6>
+				</div>
+				<div class="small6">
+					<h2 style="font-size: 16px;margin-top: 15px;margin-left: 20px; color: rgb(51,51,51);">
+						初夏时尚T恤
+					</h2>
+					<h6 style="color: rgb(249,130,155);margin-left: 20px;margin-top: 5px;">
+						新潮出众
+					</h6>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="sp">
+			<div class="sp1">
+				<p style="color: rgb(51,51,51);">品质保障</p>
+				<p style="font-size: 12px; color: #808080;margin-top: 5px;">品质护航 购物无忧</p>
+			</div>
+			<div class="sp2">
+				<p style="color: rgb(51,51,51);">品质保障</p>
+				<p style="font-size: 12px; color: #808080;margin-top: 5px;">品质护航 购物无忧</p>
+			</div>
+			<div class="sp3">
+				<p style="color: rgb(51,51,51);">品质保障</p>
+				<p style="font-size: 12px; color: #808080;margin-top: 5px;">品质护航 购物无忧</p>
+			</div>
+			<div class="sp4">
+				<p style="color: rgb(51,51,51);">品质保障</p>
+				<p style="font-size: 12px; color: #808080;margin-top: 5px;">品质护航 购物无忧</p>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="more">
+			<div class="mb1">
+				<ul>
+					<li>
+						购物指南
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;免费注册
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;开通支付宝
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;支付宝充值
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mb2">
+				<ul>
+					<li>
+						品质保障
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;发票保障
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;售后规则
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;缺货赔付
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mb3">
+				<ul>
+					<li>
+						支付方式
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;快捷支付
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;信用卡
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;货到付款
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mb4">
+				<ul>
+					<li>
+						商家服务
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;商家入驻
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;商家中心
+						</a>
+					</li>
+					<li>
+						<a href="">
+							&nbsp;&nbsp;运营服务
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mb5">
+				<ul>
+					<li>
+						手机靓淘
+					</li>
+					<li>
+						<img src="${ctx}/static/front/img/98.png"/>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="link">
+			<ul>
+				<li>
+					<a href="">
+						关于靓淘
+					</a>
+				</li>
+				<li>
+					<a href="">
+						帮助中心
+					</a>
+				</li>
+				<li>
+					<a href="">
+						开放平台
+					</a>
+				</li>
+				<li>
+					<a href="">
+						诚聘精英
+					</a>
+				</li>
+				<li>
+					<a href="">
+						联系我们
+					</a>
+				</li>
+				<li>
+					<a href="">
+						网站合作
+					</a>
+				</li>
+				<li>
+					<a href="">
+						法律声明及隐私政策
+					</a>
+				</li>
+				<li>
+					<a href="">
+						知识产权
+					</a>
+				</li>
+				<li>
+					<a href="">
+						廉政举报
+					</a>
+				</li>
+				<li>
+					<a href="">
+						规则意见征集
+					</a>
+				</li>
 			</ul>
 		</div>
-		<!--banner和左边菜单栏-->
-		<div id="banner" class="box1200 clear">
-			<div id="navleft">
-				<li>
-					<c:forEach items="${topCategoryList}" var="topCategory">
-						<p class="title">${topCategory.name }</p>
-						<div class="navleftcon">
-							<div class="navleftconmin">
-								<ul class="clear ">
-									<c:forEach items="${secondCategoryList}" var="secondCategory">
-										<c:if test="${secondCategory.parentId == topCategory.id}">
-											<li>${secondCategory.name }</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</div>
-						</div>
-					</c:forEach>
-				</li>
-			</div>
-			<div id="bannerCon">
-				<div id="pptwrapper">
-					<div class="pptbox" id="boxAnimate">
-						<ul class="innerwrapper">
-							<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-							<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-							<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-							<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-							<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-							<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-							
-						</ul>
-						<ul class="controls">
-							<li class="current">1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-						</ul>			
-						<span class="btnleft"></span>
-						<span class="btnright"></span>
-					</div>
-				</div>
-			</div>
-			
+		<div class="copyright">
+			COPYRIGHT 2010-2017 北京创锐文化传媒有限公司 JUMEI.COM 保留一切权利. 客服热线：400-123-888888<br /> 
+			京公网安备 110101020011226|京ICP证111033号|食品流通许可证 SP1101051110165515（1-1）|营业执照
 		</div>
-		<!--乐购今日推荐-->
-		<div id="recommend" class="box1200 clear">
-			<p class="recommendTitle"> 乐购.今日推荐</p>
-			<!--小商品列表-->
-			<div id="recommendConMin" class="clear">
+		<script type="text/javascript">
+			var m = 0;
+			$(".banner_box .banner").hide().eq(0).show();
+			function changeImg(){
+				if(m<3){m=m+1}else{m=0}
+				$(".circle li").removeClass("current").eq(m).addClass("current");
+				$(".banner_box .banner").hide().eq(m).show();
+			}
+			t = setInterval(changeImg,1000);
+			$(".banner_box").mouseenter(
+				function(){
+				clearInterval(t);
+				}
+			).mouseleave(
+				function(){
+				t = setInterval(changeImg,1000);
+				}
+			)
+			$(".circle li").click(
+				function(){
+					m = $(this).index();
+					$(".circle li").removeClass("current").eq(m).addClass("current");
+					$(".banner_box .banner").hide().eq(m).show();
+				}
+			)
+/*			
+			$(".banner_box .banner").hide().eq(0).show();
+			$(".circle li").click(
+				function(){
+					var i = 0;
+					i = $(this).index();
+					$(".banner_box .banner").hide().eq(i).show();
 					
-				
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				<div class="recommendConMin">
-					<div >
-						<img src="${ctx}/static/front/img/demo-cp01.jpg"/>
-						
-					</div>
-					<img src="${ctx}/static/front/img/qianggou.png"/>
-					<p class="ht c_333">黑爵青蜂侠六建电竞游戏鼠标</p>
-					<p class="fs14 f60 ht">全国联保&nbsp;一年免费包换</p>
-					<p class="ht f60 fs24 m_t6">￥:299</p>
-				</div>
-				
-				
-			</div>
-		</div>
-		
-		
-		
-		
-		<!--电子书-->
-		<div id="textbook" class="box1200 louti_top">
-			
-			<!--左边-->
-			<div class="textbookleft clear">
-				<!--标题-->
-				<div class="publicTitle clear">
-					<p>书.电子书</p>
-					<ul class="clear">
-						<li class="bookClick">最新上架</li>
-						<li>独家畅销</li>
-						<li>电子书</li>
-					</ul>
-				</div>
-				
-				
-				<!--内容-->
-				<div  class="bookClickMin .bookDisblock clear">
-					<div class="textbookleftL clear">
-							<div>
-								<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-							</div>
-							<ul class="leftConMin">
-								<li>11女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							
-					</div>
-					<div class="textbookleftC clear">
-						<div class="top">
-							<div id="pptwrapper1">
-								<div class="pptbox  boxAnimate1">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>	
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-					<div class="textbookleftR clear">
-						<div class="min borderR borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min  borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<img src="${ctx}/static/front/img/demo-ebook.jpg"/>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-				</div>
-				
-				
-				
-				
-				
-				
-				<div  class="bookClickMin bookDisnone clear">
-					<div class="textbookleftL clear">
-							<div>
-								<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-							</div>
-							<ul class="leftConMin">
-								<li>22女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							
-					</div>
-					<div class="textbookleftC clear">
-						<div class="top">
-							<div id="pptwrapper1">
-								<div class="pptbox  boxAnimate1">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>	
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-					<div class="textbookleftR clear">
-						<div class="min borderR borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min  borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-				</div>
-				   
-				   
-				   
-				   
-				   
-				   
-				   
-				
-				<div  class="bookClickMin bookDisnone clear">
-					<div class="textbookleftL clear">
-							<div>
-								<img src="img/ebookLeft.jpg"/>
-							</div>
-							<ul class="leftConMin">
-								<li>33女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							<ul class="leftConMin">
-								<li>女包</li>
-								<li>冰丝内裤</li>
-								<li>蕾丝衬衫</li>
-								<li>女包</li>
-							</ul>
-							
-					</div>
-					<div class="textbookleftC clear">
-						<div class="top">
-							<div id="pptwrapper1">
-								<div class="pptbox  boxAnimate1">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>	
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-					<div class="textbookleftR clear">
-						<div class="min borderR borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min  borderB">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min borderR ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-						<div class="min ">
-							<p class="mintitle"><a href="product.html">奥运狂欢</a></p>
-							<p class="mincon">10万种电子书&nbsp;直降40%</p>
-							<div >
-								<a href="product.html"><img src="${ctx}/static/front/img/demo-ebook.jpg"/></a>
-							</div>
-							<p class="minMonery">￥49<span>￥79</span></p>
-						</div>
-					</div>
-				</div>
-				
-			</div>	
-				
-				
-				<!--右边部分-->
-				
-			
-			<div id="textbookright">
-				<ul>
-					<li id="textbookrightTitle">新书畅销榜</li>
-					<li >
-						<div class="bookDisnone clear textbook_title">
-							<p class="textbookrightred left">1</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="textbook_con clear">
-							<p class="textbookrightred left">1</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">2</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">2</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">3</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">3</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">4</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">4</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">5</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">5</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">6</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">6</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					<li>
-						<div  class="clear textbook_title">
-							<p class="textbookrightred left">7</p><p class="lispan left">就喜欢你看不惯我，又打不到我</p>
-						</div>
-						<div class="bookDisnone textbook_con clear">
-							<p class="textbookrightred">7</p>
-							<div  class="left">
-								<img  class="left"  src="${ctx}/static/front/img/demo-ebook.jpg"/>
-								从你的全世界路过入选央视“2014中国好书”的80后作品！十年华语畅销小说
-							</div>
-						</div>
-						
-					</li>
-					
-				</ul>
-			</div>
-		</div>
-		
-		
-		
-		
-		
-		<!--服装-->
-		<div id="cloth" class="box1200 clear louti_top">
-			<!--标题-->
-				<div class="publicTitle clear">
-					<p>服装</p>
-					<ul class="clear">
-						<li class=" bookClick">女装内衣</li>
-						<li>热销男装</li>
-						<li>精品鞋靴</li>
-					</ul>
-				</div>
-				<!--内容区1-->
-				<div class="clothCon clear bookDisblock">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>11女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="${ctx}/static/front/img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区2-->
-				<div class="clothCon clear bookDisnone">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>22女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="${ctx}/static/front/img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区3-->
-				<div class="clothCon clear bookDisnone">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>33女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="${ctx}/static/front/img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-		</div>
-		<div class="conImg">
-			<img src="${ctx}/static/front/img/logo13_11.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_12.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_13.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_14.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_15.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_16.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_17.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_18.jpg"/>
-			<img src="${ctx}/static/front/img/logo13_19.jpg"/>
-		</div>
-		<!--户外运动-->
-		<div id="sport" class="box1200 louti_top">
-			<!--标题-->
-				<div class="publicTitle clear">
-					<p>户外运动</p>
-					<ul class="clear">
-						<li class="bookClick">女装内衣</li>
-						<li>热销男装</li>
-						<li>精品鞋靴</li>
-					</ul>
-				</div>
-				<!--内容区1-->
-				<div class="sportCon clear bookDisblock">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>11女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区2-->
-				<div class="sportCon clear bookDisnone">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>22女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区3-->
-				<div class="sportCon clear bookDisnone">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>33女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-		</div>
-			
-		<!--童装-->
-		<div id="children" class="box1200 louti_top">
-			<!--标题-->
-				<div class="publicTitle clear">
-					<p>童装</p>
-					<ul class="clear">
-						<li class="bookClick">女装内衣</li>
-						<li>热销男装</li>
-						<li>精品鞋靴</li>
-					</ul>
-				</div>
-				<!--内容区1-->
-				<div class=" bookDisblock clear childrenCon">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="${ctx}/static/front/img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>11女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="${ctx}/static/front/img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区2-->
-				<div class=" bookDisnone clear childrenCon">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>22女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--内容区3-->
-				<div class="childrenCon clear bookDisnone">
-					
-				<!--左边-->
-					<div class="leftCon clear">
-						<div>
-							<img src="img/ebookLeft.jpg"/>
-						</div>
-						<ul class="leftConMin">
-							<li>33女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-						<ul class="leftConMin">
-							<li>女包</li>
-							<li>冰丝内裤</li>
-							<li>蕾丝衬衫</li>
-							<li>女包</li>
-						</ul>
-					</div>
-					<!--中间-->
-					<div class="centerCon ">
-						<div class="centerConTop">
-							<div id="pptwrapper2">
-								<div class="pptbox  boxAnimate2">
-									<ul class="innerwrapper">
-										<li><a href="#"><img src="${ctx}/static/front/img/banner1.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner2.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner3.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner4.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner5.jpg"/></a></li>
-										<li><a href="#"><img src="${ctx}/static/front/img/banner6.jpg"/></a></li>
-									</ul>
-									<ul class="controls">
-										<li class="current">1</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-										<li>5</li>
-										<li>6</li>
-									</ul>			
-									<span class="btnleft"></span>
-									<span class="btnright"></span>
-								</div>
-							</div>
-						</div>
-						<div class="centerConBut">
-							<img src="img/demo-centerPic-B.jpg"/>
-						</div>
-					</div>
-					<!--右边-->
-					<div class="rightCon clear">
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConTop">
-							<p class="rightConTopTitle">达芙妮</p>
-							<p class="rightConTopCon">夏季凉鞋清仓</p>
-							<p class="rightConTopnet">领77元优惠券</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-		</div>
-		<!--家居日用-->
-		<div id="household" class="box1200 clear louti_top">
-			<!--标题-->
-				<div class="publicTitle clear">
-					<p>家具日用</p>
-				</div>
-				<div id="householdleft">
-					<img src="img/jiaju.png"/>
-				</div>
-				<div id="householdright" class="clear">
-					<div class="rightConTop">
-						<p class="rightConTopTitle">达芙妮</p>
-						<p class="rightConTopCon">夏季凉鞋清仓</p>
-						<p class="rightConTopnet">领77元优惠券</p>
-						<div>
-							<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-						</div>
-					</div>
-					<div class="rightConTop">
-						<p class="rightConTopTitle">达芙妮</p>
-						<p class="rightConTopCon">夏季凉鞋清仓</p>
-						<p class="rightConTopnet">领77元优惠券</p>
-						<div>
-							<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-						</div>
-					</div>
-					<div class="rightConTop">
-						<p class="rightConTopTitle">达芙妮</p>
-						<p class="rightConTopCon">夏季凉鞋清仓</p>
-						<p class="rightConTopnet">领77元优惠券</p>
-						<div>
-							<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-						</div>
-					</div>
-					<div class="rightConTop">
-						<p class="rightConTopTitle">达芙妮</p>
-						<p class="rightConTopCon">夏季凉鞋清仓</p>
-						<p class="rightConTopnet">领77元优惠券</p>
-						<div>
-							<img src="${ctx}/static/front/img/demo-common-right-big.gif"/>
-						</div>
-					</div>
-					<div id="householdrighttop" class="clear">
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-						<div class="rightConBut">
-							<p class="rightConTopTitle">暑假清凉季</p>
-							<p class="rightConTopCon">满199减30</p>
-							<div>
-								<img src="${ctx}/static/front/img/demo-common-right-small.jpg"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-		</div>
-		<!--推广商品-->
-		<div id="generalize" class="box1200 clear louti_top">
-			<div class="generalizeC clear"> 
-				<p>推广商品</p> 
-				<ul class="clear">
-					<li class="current"></li>
-					<li></li>
-				</ul>
-			</div>
-			<div id="generalizeCon_one" class="generalizeCon clear" >
-				<div class="generalizeMin current">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			<div id="generalizeCon_two" class="generalizeCon bookDisnone clear" >
-				<div class="generalizeMin current">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-				<div class="generalizeMin">
-					<div><img src="img/demo-pop.jpg"/></div>
-					<h5>Pigeon法国制奶嘴，无毒天然乳胶</h5>
-					<p class="generalizeMon">￥:189</p>
-					<p class="generalizemin">已有<span>988</span>条评论</p>
-				</div>
-			</div>
-			
-		</div>
-		
-		<!--页脚-->
-		<div class="box" id="footer">
-			<div id="fanhuitop"><img src="img/top.png"/></div>
-			<div class="box recommendTitle">
-				
-			</div>
-			<div class="box" id="footermax">
-				<div id="footertop">
-					<div class="footertop">
-						
-					</div>
-					<div id="footertop2" class="footertop">
-						
-					</div>
-					<div id="footertop3" class="footertop">
-						
-					</div>
-					<div id="footertop4"  class="footertop">
-						
-					</div>
-				</div>
-			</div>
-			<div id="footerCenter" class=" clear">
-				<ul class="footermin">
-					<li class="footerminbox">购物指南</li>
-					<li>购物流程</li>
-					<li>发票制度</li>
-					<li>账户管理</li>
-					<li>会员优惠</li>
-				</ul>
-				<ul class="footermin">
-					<li class="footerminbox">购物指南</li>
-					<li>购物流程</li>
-					<li>发票制度</li>
-					<li>账户管理</li>
-					<li>会员优惠</li>
-				</ul>
-				<ul class="footermin">
-					<li class="footerminbox">购物指南</li>
-					<li>购物流程</li>
-					<li>发票制度</li>
-					<li>账户管理</li>
-					<li>会员优惠</li>
-				</ul>
-				<ul class="footermin">
-					<li class="footerminbox">购物指南</li>
-					<li>购物流程</li>
-					<li>发票制度</li>
-					<li>账户管理</li>
-					<li>会员优惠</li>
-				</ul>
-				<ul class="footermin">
-					<li class="footerminbox">购物指南</li>
-					<li>购物流程</li>
-					<li>发票制度</li>
-					<li>账户管理</li>
-					<li>会员优惠</li>
-				</ul>
-			</div>
-			<div id="footerbut">
-				<a href="#">公司简介</a>|<a href="#">Investor&nbsp;Relations</a>|<a href="#">网站联盟</a>|<a href="#">乐购招商</a>|<a href="#">机构销售</a>|<a href="#">手机乐购</a>|<a href="#">官方Blog</a>|<a href="#">热词搜索</a>
-				<p><span>Copyrigth</span> <span>(C)</span> <span>乐购网</span> <span>2004-2016</span> <span>All</span> <span>Rights</span> <span>Reserved</span> </p>
-			</div>
-		</div>
+				}
+			)
+			$(".circle li").click(
+				function(){
+					var n = 0;
+					n = $(this).index();
+					$(".circle li").removeClass("current").eq(n).addClass("current");
+				}
+			)*/
+		</script>
 	</body>
+
 </html>
