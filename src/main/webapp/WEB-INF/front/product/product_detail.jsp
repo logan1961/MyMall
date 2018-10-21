@@ -782,10 +782,10 @@
 			layui.use(['layer'], function(){
 		       var layer = layui.layer;
 		       layer.msg('Hello World');
-			});
+			}); 
 			
 			$.ajax({
-				url : "${ctx}/cart/addCart.shtml",
+				url : "${ctx}/cart/addOrUpdateCart.shtml",
 				data : {"productId" : "${product.id}", "amount" : $("#amount").val(), "isChecked" : 1},
 				type : "POST",
 				dataType : "json",

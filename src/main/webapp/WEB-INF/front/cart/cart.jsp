@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<title>乐购商城_购物车</title>
 		<link rel="stylesheet" type="text/css" href="${ctx}/static/front/CSS/cart_style.css" />
+		<link rel="stylesheet" href="${ctx}/static/lib/layui/css/layui.css">
 	</head>
 
 	<body>
@@ -82,76 +83,68 @@
 					<li style="margin-left: 58px;margin-right: 36px;">操作</li>
 				</ul>
 			</div>
-			<div class="title_bottom">
-			<input type="checkbox" style="color: #666666;margin: 23px 11px 10px 22px;" />
-			<img src="${ctx}/static/front/img/156.png" style="margin: 0px 142px 0px 11px; " />
-			<img src="${ctx}/static/front/img/157.png" style="margin-left: 142px; " />
 		</div>
-		</div>
-		<div class="car_1">
-			<div class="car_1_top">
-				<img src="${ctx}/static/front/img/158.png" />
-				<p class="car_1_top_p">
-					<span class="span1">
-						活动商品购满¥105.00 , 即可加价换购商品1件&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					</span>
-					<span class="span2">
-						&nbsp;查看换购品
-					</span>
-					<span class="span3">
-						&nbsp;&nbsp;去凑单&gt;
-					</span>
-				</p>
+		<c:forEach items="${cartVO.cartItemVOList}" var="cartItemVO">
+			<div class="car_1">
+				<div class="car_1_top">
+					<img src="${ctx}/static/front/img/158.png" />
+					<p class="car_1_top_p">
+						<span class="span1">
+							活动商品购满¥105.00 , 即可加价换购商品1件&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</span>
+						<span class="span2">
+							&nbsp;查看换购品
+						</span>
+						<span class="span3">
+							&nbsp;&nbsp;去凑单&gt;
+						</span>
+					</p>
+				</div>
+				<div class="car_2_bottom">
+					<div class="car_con_1">
+						<input id="checkbox${cartItemVO.product.id}" type="checkbox" />
+					</div>
+					<div class="car_con_2">
+						<img width="85px" height="100px" src="/pic/${cartItemVO.product.mainImage}" />
+					</div>
+					<div class="car_con_3">
+						<p class="p_title">${cartItemVO.product.name }</p>
+						<img src="${ctx}/static/front/img/160.png" />
+						<p class="p_seven">&nbsp;支持7天无理由退货</p>
+						<img src="${ctx}/static/front/img/161.png" />
+						<p class="p_select">&nbsp;选包装</p>
+					</div>
+					<ul class="car_ul">
+						<li class="price">
+							<span id="price${cartItemVO.product.id}" style="color: #666666;">
+								¥ ${cartItemVO.product.price}
+							</span>
+						</li>
+						<li class="num_select">
+							<input class="car_ul_btn1" type="button" onclick="updateAmount(${cartItemVO.product.id},${cartItemVO.product.price},-1)" value="-" />
+							<input id="num${cartItemVO.product.id}" class="car_ul_text" type="text" value="${cartItemVO.amount}" placeholder="${cartItemVO.amount }" />
+							<input class="car_ul_btn2" type="button" onclick="updateAmount(${cartItemVO.product.id},${cartItemVO.product.price},1)" value="+" />
+						</li>
+						<li class="money">
+							<span id="cartItemTotalPrice${cartItemVO.product.id}" style="color: #F41443;">
+								¥ ${cartItemVO.product.price * cartItemVO.amount }
+							</span>
+						</li>
+						<li class="delete">
+							<img onclick="deleteCartItemById(${cartItemVO.product.id})" src="${ctx}/static/front/img/166.png" />
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="car_2_bottom">
-				<div class="car_con_1">
-					<input type="checkbox" />
-				</div>
-				<div class="car_con_2">
-					<img src="${ctx}/static/front/img/159.png" />
-				</div>
-				<div class="car_con_3">
-					<p class="p_title">华为&nbsp;畅想6S&nbsp;银色&nbsp;移动联通电信4G手机&nbsp;双卡双待</p>
-					<img src="${ctx}/static/front/img/160.png" />
-					<p class="p_seven">&nbsp;支持7天无理由退货</p>
-					<img src="${ctx}/static/front/img/161.png" />
-					<p class="p_select">&nbsp;选包装</p>
-				</div>
-				<ul class="car_ul">
-					<li class="price">
-						<span style="color: #CCCCCC; margin-bottom: 15px;line-height: 20px;">
-							<del>
-								¥ 1699.00<br />
-							</del>
-						</span>
-						<span style="color: #666666;">
-							¥ 1499.00
-						</span>
-					</li>
-					<li class="num_select">
-						<input class="car_ul_btn1" type="button" value="-" />
-						<input class="car_ul_text" type="text" placeholder="1" />
-						<input class="car_ul_btn2" type="button" value="+" />
-					</li>
-					<li class="money">
-						<span style="color: #F41443;">
-							¥ 1499.00
-						</span>
-					</li>
-					<li class="delete">
-						<img src="${ctx}/static/front/img/166.png" />
-					</li>
-				</ul>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+		</c:forEach>
 		<div class="total">
 				<ul style="color: #666666;margin-top: 10px;margin-bottom: 10px;">
 					<li style="margin-left: 16px;margin-right: 8px;">
 						<input type="checkbox" />
 					</li>
 					<li style="margin-left: 8px;margin-right: 265px;">全选</li>
-					<li style="margin-left: 265px;margin-right: 18px;">总金额（已免运费）：<span style="color: #F41443;">¥7175</span></li>
+					<li style="margin-left: 265px;margin-right: 18px;">总金额（已免运费）：<span id="totalPrice" style="color: #F41443;">¥7175</span></li>
 					<li class="total_right"><a href="">立即结算</a></li>
 				</ul>
 			</div>
@@ -334,5 +327,55 @@
 			京公网安备 110101020011226|京ICP证111033号|食品流通许可证 SP1101051110165515（1-1）|营业执照
 		</div>
 	</body>
-
+	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
+	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
+	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer']),function(){
+			var layer = layui.layer;
+		}
+		
+		//更新购物车中商品的数量
+		function updateAmount(productId,price,num){
+			//String类型
+			var amount = $("#num" + productId).val();
+			$.ajax({
+				url:"${ctx}/cart/addOrUpdateCart.shtml",
+				data:{"productId":productId,"amount":num,"isChecked":1},
+				type:"POST",
+				dataType:"json",
+				success : function(resp){
+					if(resp.code == util.SUCCESS){
+						amount = parseInt(amount) + num;
+						$("#num" + productId).val(amount);
+						var totalPrice = amount * price;
+						$("#cartItemTotalPrice"+productId).html("￥" + totalPrice);
+					} else {
+						mylayer.errorMsg(resp.msg);
+					}
+				}
+			})
+		}
+		
+		//根据商品id删除购物车中购物项
+		function deleteCartItemById(productId){
+			layer.confirm("您确定要删除么？",function(){
+				$.ajax({
+					url:"${ctx}/cart/deleteCartItemById.shtml",
+					data:{"productId":productId},
+					type:"POST",
+					datatype:"json",
+					success:function(resp){
+						if(resp.code == util.SUCCESS){
+							mylayer.success(resp.msg);
+							$("#checkbox" + productId).parent().parent().parent().remove();
+						} else {
+							mylayer.errorMsg(resp.msg);
+						}
+					}
+				})
+			})
+		}
+	</script>
 </html>

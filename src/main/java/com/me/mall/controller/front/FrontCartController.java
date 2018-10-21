@@ -2,6 +2,7 @@ package com.me.mall.controller.front;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -54,9 +55,9 @@ public class FrontCartController {
 		return "/cart/cart";
 	}
 
-	@RequestMapping("/addCart.shtml")
+	@RequestMapping("/addOrUpdateCart.shtml")
 	@ResponseBody
-	public ServerResponse addCart(Integer productId, Integer amount, Integer isChecked, 
+	public ServerResponse addOrUpdateCart(Integer productId, Integer amount, Integer isChecked, 
 			HttpServletRequest request, HttpServletResponse response) {
 		// 1、将Cookie里面的购物车转换为CartVO对象(类似于从数据库里面取出所有)
 		CartVO cartVO = getCartVOFromCookie(request);
@@ -66,17 +67,52 @@ public class FrontCartController {
 		
 		// 2、往CartVO里面添加这个购物项
 		//（购物车中所有数据转换为CartVO对象）
-		boolean result = addCartVO(cartVO, productId, amount, isChecked);
+		boolean result = addOrUpdateCartVO(cartVO, productId, amount, isChecked);
 		if (result == false) {
 			return ServerResponse.createError("添加购物车失败");
 		}
 		
 		// 3、将CartVO对象设置到Cookie（类似于将所有数据写到数据库中）
-		setCartVoToCookie(cartVO, response);
+		setCartVOToCookie(cartVO, response);
 		return ServerResponse.createSuccess("添加购物车成功");
+	}
+	
+	/**
+	 * 根据id删除购物车中的cartItemVO
+	 * @param productId
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/deleteCartItemById.shtml")
+	@ResponseBody
+	public ServerResponse deleteCartItemById(Integer productId
+			,HttpServletRequest request
+			,HttpServletResponse response){
+		//将cookie中地购物车转换为CartVO对象
+		CartVO cartVO = getCartVOFromCookie(request);
+		if (null == cartVO) {
+			return ServerResponse.createError("获取购物车失败");
+		}
+		
+		List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
+		//
+		Iterator<CartItemVO> iterator = cartItemVOList.iterator();
+		while (iterator.hasNext()) {
+			CartItemVO cartItemVO = iterator.next();
+			if (cartItemVO.getProduct().getId().intValue() 
+					== productId.intValue() ) {
+				iterator.remove();
+			}
+		}
+		
+		//将cartVO对象写到cookie中
+		setCartVOToCookie(cartVO, response);
+		return ServerResponse.createSuccess("删除购物车成功");
 	}
 
 	/**
+	 * 将商品添加到购物车的CartVO中
 	 * TODO: 可以加上异常情况的判断，例如：1、商品已经下架 2、库存不够
 	 * 这些情况都应该返回添加购物车失败
 	 * 
@@ -85,7 +121,7 @@ public class FrontCartController {
 	 * @param amount
 	 * @param isChecked
 	 */
-	private boolean addCartVO(CartVO cartVO, Integer productId, Integer amount, Integer isChecked) {
+	private boolean addOrUpdateCartVO(CartVO cartVO, Integer productId, Integer amount, Integer isChecked) {
 		boolean isExist = false;
 		List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
 		Product product = productService.findById(productId);
@@ -95,7 +131,7 @@ public class FrontCartController {
 				isExist = true;
 				int newAmount = cartItemVO.getAmount() + amount;
 				// 判断商品有没有查过库存
-				if (newAmount > product.getStock()) {
+				if (newAmount > product.getStock() || newAmount < 0) {
 					// 超出库存，返回false，添加购物车失败
 					return false;
 				}
@@ -141,7 +177,7 @@ public class FrontCartController {
 					String value = cookie.getValue();
 					try {
 						// 将json字符串转换为Java对象
-						cartVO = objectMapper.readValue(value, CartVO.class);
+						cartVO = objectMapper.readValue(value,CartVO.class);
 					} catch (JsonParseException e) {
 						e.printStackTrace();
 					} catch (JsonMappingException e) {
@@ -160,14 +196,14 @@ public class FrontCartController {
 	 * @param response
 	 * @param cartVO
 	 */
-	private void setCartVoToCookie(CartVO cartVo, HttpServletResponse response) {
+	private void setCartVOToCookie(CartVO cartVO, HttpServletResponse response) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		// 只有对象中不为null才转换
 		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		// 将cartVo对象以json形式放到cookie
 		StringWriter stringWriter = new StringWriter();
 		try {
-			objectMapper.writeValue(stringWriter, cartVo);
+			objectMapper.writeValue(stringWriter, cartVO);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
