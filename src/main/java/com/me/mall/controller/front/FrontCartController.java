@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,16 @@ public class FrontCartController {
 	public String getCartPage(HttpServletRequest request, Model model) {
 		// 将Cookie里面购物车转换成CartVO这个对象
 		CartVO cartVO = getCartVOFromCookie(request);
-		List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
-		// CartItemVO里面的Product只有id，我们要在购物车页面展示商品的详细信息，
-		// 所以要根据这个id查找出产品的详细信息，直接把原来的Product替换
-		for (CartItemVO cartItemVO : cartItemVOList) {
-			Product product = productService.findById(cartItemVO.getProduct().getId());
-			cartItemVO.setProduct(product);
+		if (null != cartVO) {//购物车存在
+			List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
+			// CartItemVO里面的Product只有id，我们要在购物车页面展示商品的详细信息，
+			// 所以要根据这个id查找出产品的详细信息，直接把原来的Product替换
+			for (CartItemVO cartItemVO : cartItemVOList) {
+				Product product = productService.findById(cartItemVO.getProduct().getId());
+				cartItemVO.setProduct(product);
+			}
+			model.addAttribute("cartVO", cartVO);
 		}
-		model.addAttribute("cartVO", cartVO);
 		return "/cart/cart";
 	}
 	
@@ -162,7 +165,7 @@ public class FrontCartController {
 		setCartVOToCookie(cartVO, response);
 		return ServerResponse.createSuccess("删除购物车成功");
 	}
-
+	
 	/**
 	 * 将商品添加到购物车的CartVO中
 	 * TODO: 可以加上异常情况的判断，例如：1、商品已经下架 2、库存不够

@@ -65,4 +65,5 @@ public interface UserMapper {
 	int deleteAll(String[] idArry);
 
 	List<Product> pageList(User user);
+
 }
