@@ -38,8 +38,13 @@ public class FrontCartController {
 	
 	@Autowired
 	private IProductService productService;
-
-	// "${ctx}/cart/getCartPage.shtml?productId=${product.id}&amount="+$("#amount").val()+"&isChecked=1";
+	
+	/**
+	 * 得到购物车界面
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/getCartPage.shtml")
 	public String getCartPage(HttpServletRequest request, Model model) {
 		// 将Cookie里面购物车转换成CartVO这个对象
@@ -54,7 +59,16 @@ public class FrontCartController {
 		model.addAttribute("cartVO", cartVO);
 		return "/cart/cart";
 	}
-
+	
+	/**
+	 * 添加或修改购物车
+	 * @param productId
+	 * @param amount
+	 * @param isChecked
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("/addOrUpdateCart.shtml")
 	@ResponseBody
 	public ServerResponse addOrUpdateCart(Integer productId, Integer amount, Integer isChecked, 
@@ -67,11 +81,49 @@ public class FrontCartController {
 		
 		// 2、往CartVO里面添加这个购物项
 		//（购物车中所有数据转换为CartVO对象）
-		boolean result = addOrUpdateCartVO(cartVO, productId, amount, isChecked);
-		if (result == false) {
-			return ServerResponse.createError("添加购物车失败");
+		boolean isExist = false;
+		List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
+		Product product = productService.findById(productId);
+		for (CartItemVO cartItemVO : cartItemVOList) {
+			// 2.1、productId对应的商品已经在CartVO里面的话，只是将数量更新
+			if (cartItemVO.getProduct().getId().intValue() == productId.intValue()) {
+				isExist = true;
+				//当amount没有发生变化时也可以执行
+				if (null != amount) {
+					int newAmount = cartItemVO.getAmount() + amount;
+					// 判断商品有没有查过库存
+					if (newAmount < 0) {
+						//数量不合法
+						return ServerResponse.createError("商品数量不合法");
+					}
+					if (newAmount > product.getStock() ) {
+						// 超出库存，返回false，添加购物车失败
+						return ServerResponse.createError("超出库存");
+					}
+					cartItemVO.setAmount(newAmount);
+				}
+				if (null != isChecked) {
+					// 将是否选中的状态修改为选中状态isChecked=1
+					cartItemVO.setIsChecked(isChecked);
+				}
+				setCartVOToCookie(cartVO, response);
+				return ServerResponse.createSuccess("更新成功");
+			}
 		}
 		
+		// 2.2、productId对应的商品不在CartVO里面的话，添加这个CartItemVO到CartVO
+		// 在原来CartVO购物车里面没有找到这个商品，直接添加这个商品
+		if (isExist == false) {
+			CartItemVO cartItemVO = new CartItemVO();
+			Product prod = new Product();
+			prod.setId(productId);
+			cartItemVO.setProduct(prod);
+			cartItemVO.setAmount(amount);
+			cartItemVO.setIsChecked(CART_CHECKED);
+			
+			cartItemVOList.add(cartItemVO);
+		}
+				
 		// 3、将CartVO对象设置到Cookie（类似于将所有数据写到数据库中）
 		setCartVOToCookie(cartVO, response);
 		return ServerResponse.createSuccess("添加购物车成功");
@@ -96,7 +148,7 @@ public class FrontCartController {
 		}
 		
 		List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
-		//
+		//在遍历的时候不能用普通方法删除，应使用迭代器删除
 		Iterator<CartItemVO> iterator = cartItemVOList.iterator();
 		while (iterator.hasNext()) {
 			CartItemVO cartItemVO = iterator.next();
@@ -129,15 +181,20 @@ public class FrontCartController {
 			// 1、productId对应的商品已经在CartVO里面的话，只是将数量更新
 			if (cartItemVO.getProduct().getId().intValue() == productId.intValue()) {
 				isExist = true;
-				int newAmount = cartItemVO.getAmount() + amount;
-				// 判断商品有没有查过库存
-				if (newAmount > product.getStock() || newAmount < 0) {
-					// 超出库存，返回false，添加购物车失败
-					return false;
+				//当amount没有发生变化时也可以执行
+				if (null != amount) {
+					int newAmount = cartItemVO.getAmount() + amount;
+					// 判断商品有没有查过库存
+					if (newAmount > product.getStock() || newAmount < 0) {
+						// 超出库存，返回false，添加购物车失败
+						return false;
+					}
+					cartItemVO.setAmount(newAmount);
 				}
-				cartItemVO.setAmount(newAmount);
-				// 将是否选中的状态修改为选中状态isChecked=1
-				cartItemVO.setIsChecked(CART_CHECKED);
+				if (null != isChecked) {
+					// 将是否选中的状态修改为选中状态isChecked=1
+					cartItemVO.setIsChecked(isChecked);
+				}
 			}
 		}
 		

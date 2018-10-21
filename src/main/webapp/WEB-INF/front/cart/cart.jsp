@@ -102,7 +102,12 @@
 				</div>
 				<div class="car_2_bottom">
 					<div class="car_con_1">
-						<input id="checkbox${cartItemVO.product.id}" type="checkbox" />
+						<c:if test="${cartItemVO.isChecked == 1}">
+							<input id="checkbox${cartItemVO.product.id}" name="selectCheckbox" checked="checked" type="checkbox" onclick="updateCartItemStatus(${cartItemVO.product.id})" />
+						</c:if>
+						<c:if test="${cartItemVO.isChecked == 0}">
+							<input name="selectCheckbox" id="checkbox${cartItemVO.product.id}" type="checkbox" onclick="updateCartItemStatus(${cartItemVO.product.id})" />
+						</c:if>
 					</div>
 					<div class="car_con_2">
 						<img width="85px" height="100px" src="/pic/${cartItemVO.product.mainImage}" />
@@ -116,7 +121,7 @@
 					</div>
 					<ul class="car_ul">
 						<li class="price">
-							<span id="price${cartItemVO.product.id}" style="color: #666666;">
+							<span id="price${cartItemVO.product.id}" style="color:#666666">
 								¥ ${cartItemVO.product.price}
 							</span>
 						</li>
@@ -126,9 +131,8 @@
 							<input class="car_ul_btn2" type="button" onclick="updateAmount(${cartItemVO.product.id},${cartItemVO.product.price},1)" value="+" />
 						</li>
 						<li class="money">
-							<span id="cartItemTotalPrice${cartItemVO.product.id}" style="color: #F41443;">
-								¥ ${cartItemVO.product.price * cartItemVO.amount }
-							</span>
+							￥
+							<span id="cartItemTotalPrice${cartItemVO.product.id}" style="color: #F41443;">${cartItemVO.product.price * cartItemVO.amount}</span>
 						</li>
 						<li class="delete">
 							<img onclick="deleteCartItemById(${cartItemVO.product.id})" src="${ctx}/static/front/img/166.png" />
@@ -144,7 +148,7 @@
 						<input type="checkbox" />
 					</li>
 					<li style="margin-left: 8px;margin-right: 265px;">全选</li>
-					<li style="margin-left: 265px;margin-right: 18px;">总金额（已免运费）：<span id="totalPrice" style="color: #F41443;">¥7175</span></li>
+					<li style="margin-left: 200px;margin-right: 18px;">总金额（已免运费）：￥<span id="totalPrice" style="color: #F41443;"></span></li>
 					<li class="total_right"><a href="">立即结算</a></li>
 				</ul>
 			</div>
@@ -336,6 +340,11 @@
 			var layer = layui.layer;
 		}
 		
+		$(function(){
+			//页面加载完刷新总价格
+			refreshTotalPrice();
+		})
+		
 		//更新购物车中商品的数量
 		function updateAmount(productId,price,num){
 			//String类型
@@ -347,10 +356,12 @@
 				dataType:"json",
 				success : function(resp){
 					if(resp.code == util.SUCCESS){
+						mylayer.success(resp.msg);
 						amount = parseInt(amount) + num;
 						$("#num" + productId).val(amount);
 						var totalPrice = amount * price;
-						$("#cartItemTotalPrice"+productId).html("￥" + totalPrice);
+						$("#cartItemTotalPrice"+productId).html(totalPrice);
+						refreshTotalPrice();
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}
@@ -369,6 +380,7 @@
 					success:function(resp){
 						if(resp.code == util.SUCCESS){
 							mylayer.success(resp.msg);
+							//移除div，往上找三个parent
 							$("#checkbox" + productId).parent().parent().parent().remove();
 						} else {
 							mylayer.errorMsg(resp.msg);
@@ -376,6 +388,48 @@
 					}
 				})
 			})
+		}
+		
+		//点击checkbox时，选择或取消商品在购物商城中的状态
+		function updateCartItemStatus(productId){
+			var isChecked = $("#checkbox" + productId).prop("checked");
+			if(isChecked){
+				isChecked = 1;
+			} else {
+				isChecked = 0;
+			}
+			$.ajax({
+				url:"${ctx}/cart/addOrUpdateCart.shtml",
+				data:{"productId":productId,"isChecked":isChecked},
+				type:"POST",
+				dataType:"json",
+				success:function(resp){
+					if(resp.code == util.SUCCESS){
+						mylayer.success(resp.msg);
+						//刷新价格
+						refreshTotalPrice();
+					}else {
+						mylayer.errorMsg(resp.msg);
+					}
+				}
+			})
+		}
+		
+		//更新购物车总价格
+		function refreshTotalPrice(){
+			var checkboxs = $("input[name=selectCheckbox]:checked");
+			var totalPrice = 0.00;
+			for(var i = 0; i < checkboxs.length;i++){
+				var checkboxId = checkboxs[i].getAttribute("id");
+				//原形式checkbox111,截出id
+				var id = checkboxId.substr("checkbox".length);
+				var cartItemTotalPrice = $("#cartItemTotalPrice"+id).html();
+				console.log(cartItemTotalPrice);
+				//将字符串类型转化为float
+				totalPrice += parseFloat(cartItemTotalPrice); 
+				console.log(totalPrice);
+			}
+			$("#totalPrice").html(totalPrice);
 		}
 	</script>
 </html>
