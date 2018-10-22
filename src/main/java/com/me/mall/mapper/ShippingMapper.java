@@ -56,4 +56,6 @@ public interface ShippingMapper {
 	List<Shipping> pageList(Shipping shipping);
 
 	int deleteAll(String[] idArray);
+
+	List<Shipping> selectByUserId(Integer userId);
 }

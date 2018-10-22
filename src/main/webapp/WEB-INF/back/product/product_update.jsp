@@ -180,6 +180,7 @@
 				  }
 			  });
 		  });
+		   
 		  //ajax方式提交表单
 		  function submitForm(){
 			  $.ajax({

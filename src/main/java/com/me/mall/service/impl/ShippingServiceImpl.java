@@ -64,8 +64,9 @@ public class ShippingServiceImpl implements IShippingService{
 	}
 
 	@Override
-	public List<Shipping> selectByUserId(Integer id) {
-		return null;
+	public List<Shipping> selectByUserId(Integer userId) {
+		List<Shipping> shippings = shippingMapper.selectByUserId(userId);
+		return shippings;
 	}
 
 }

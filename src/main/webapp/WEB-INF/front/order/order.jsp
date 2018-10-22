@@ -42,17 +42,16 @@
 			<input type="button" class="input_btn fr" name="" value="搜索"/>
 		</div>		
 	</div>
-	
 	<h3 class="common_title">确认收货地址</h3>
-
-	<div class="common_list_con clearfix">
-		<dl>
-			<dt>寄送到：</dt>
-			<dd><input type="radio" name="" checked=""/>北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
-		</dl>
-		<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
-
-	</div>
+		<div class="common_list_con clearfix">
+				<dl>
+					<dt>寄送到：</dt>
+					<c:forEach items="${shippings}" var="shipping">
+						<dd><input type="radio" name="" checked="checked"/>${shipping.receiverProvince}省&nbsp;&nbsp;&nbsp;&nbsp; ${shipping.receiverCity}市&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverDistrict}&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverAddress}&nbsp;&nbsp;&nbsp;&nbsp;(${shipping.receiverName}&nbsp;收)&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverMobile}</dd>
+					</c:forEach>
+				</dl>
+				<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
+		</div>
 	
 	<h3 class="common_title">支付方式</h3>	
 	<div class="common_list_con clearfix">
@@ -71,29 +70,30 @@
 	<h3 class="common_title">商品列表</h3>
 	
 	<div class="common_list_con clearfix">
-		<ul class="goods_list_th clearfix">
-			<li class="col01">商品名称</li>
-			<li class="col02">商品单位</li>
-			<li class="col03">商品价格</li>
-			<li class="col04">数量</li>
-			<li class="col05">小计</li>		
-		</ul>
-		<ul class="goods_list_td clearfix">
-			<li class="col01">1</li>			
-			<li class="col02"><img src="images/goods/goods012.jpg"/></li>
-			<li class="col03">${cartItemVO.product.name}</li>
-			<li class="col04">500g</li>
-			<li class="col05">25.80元</li>
-			<li class="col06">1</li>
-			<li class="col07">25.80元</li>	
-		</ul>
+		<c:forEach items="${cartVO.cartItemVOList}" var="cartItemVO">
+			<ul class="goods_list_th clearfix">
+				<li class="col01">商品名称</li>
+				<li class="col03">商品价格</li>
+				<li class="col04">数量</li>
+				<li class="col05">小计</li>		
+			</ul>
+			<input type="hidden" id="productId${cartItemVO.product.id}" name="productIds" value="${cartItemVO.product.id}" />
+			<ul class="goods_list_td clearfix">
+				<li class="col01">&nbsp;</li>
+				<li class="col02"><img src="/pic/${cartItemVO.product.mainImage}"/></li>
+				<li class="col03">${cartItemVO.product.name}</li>
+				<li class="col05">￥${cartItemVO.product.price}</li>
+				<li class="col06">${cartItemVO.amount}</li>
+				<li class="col07" id="price${cartItemVO.product.id}">${cartItemVO.product.price * cartItemVO.amount}</li>	
+			</ul>
+		</c:forEach>
 	</div>
 	<h3 class="common_title">总金额结算</h3>
 	<div class="common_list_con clearfix">
 		<div class="settle_con">
-			<div class="total_goods_count">共<em>2</em>件商品，总金额<b>42.60元</b></div>
-			<div class="transit">运费：<b>10元</b></div>
-			<div class="total_pay">实付款：<b>52.60元</b></div>
+			<div class="total_goods_count">共<em>${cartVO.cartItemVOList.size()}</em>件商品，总金额<b id="totalPrice"></b></div>
+			<div class="transit">运费：<b>0元</b></div>
+			<div class="total_pay">实付款：<b id="totalPrice2">￥</b></div>
 		</div>
 	</div>
 
@@ -123,7 +123,14 @@
 		<div class="mask"></div>
 	</div>
 	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
+	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
+	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
 	<script type="text/javascript">
+		layui.use(['layer'],function(){
+			var layer = layui.layer;
+		});
+		
 		$('#order_btn').click(function() {
 			localStorage.setItem('order_finish',2);
 
@@ -137,6 +144,29 @@
 				
 			});
 		});
+		
+		$(function(){
+			//页面加载完刷新总价格
+			refreshTotalPrice();
+		})
+		
+		//订单页面总金额
+		function refreshTotalPrice(){
+			var totalPrice = 0.00;
+			var productIds = $("[name = productIds]");
+			for(var i = 0; i < productIds.length; i++){
+				var product = productIds[i].getAttribute("id");
+				//原形式productId,截出id
+				var id = product.substr("productId".length);
+				var OrderTotalPrice = $("#price"+id).html();
+				console.log(OrderTotalPrice);
+				//将字符串类型转化为float
+				totalPrice += parseFloat(OrderTotalPrice); 
+				console.log(totalPrice);
+			}
+			$("#totalPrice").html("￥" + totalPrice);
+			$("#totalPrice2").html("￥" + totalPrice);
+		}
 	</script>
 </body>
 </html>

@@ -42,11 +42,11 @@ html,body{height:100%}
 .search_bar{width:1200px;height:115px;margin:0 auto;}
 .logo{width:150px;height:59px;margin:29px 0 0 17px;}
 
-.search_con{width:616px;height:38px;border:1px solid #37ab40;margin:34px 0 0 124px;background:url(../images/icons.png) 10px -338px no-repeat;}
+.search_con{width:616px;height:38px;border:1px solid #f41443;margin:34px 0 0 124px;background:url(../images/icons.png) 10px -338px no-repeat;}
 .search_con .input_text{width:470px;height:34px;border:0px;margin:2px 0 0 36px;outline:none;font-size:12px;color:#737272;font-family:'Microsoft Yahei'}
 
 .search_con .input_btn{
-	width:100px;height:38px;background-color:#37ab40;border:0px;font-size:14px;color:#fff;font-family:'Microsoft Yahei';outline:none;cursor:pointer;
+	width:100px;height:38px;background-color:#f41443;border:0px;font-size:14px;color:#fff;font-family:'Microsoft Yahei';outline:none;cursor:pointer;
 }
 
 .guest_cart{
@@ -77,7 +77,7 @@ html,body{height:100%}
 
 .navbar .subnav_con:hover span{transform:rotateZ(180deg)}
 
-.navbar .subnav_con .subnav{position:absolute;left:0;top:40px;display:none;border-top:2px solid  #39a93e;}
+.navbar .subnav_con .subnav{position:absolute;left:0;top:40px;display:none;border-top:2px solid  #f41443;}
 .navbar .subnav_con:hover .subnav{display:block;}
 
 
@@ -145,7 +145,7 @@ html,body{height:100%}
 
 /* 页面底部样式 */
 .footer{
-	border-top:2px solid #42ad46;
+	border-top:2px solid #f41443;
 	margin:30px 0;
 }
 
@@ -393,13 +393,13 @@ html,body{height:100%}
 
 .common_title{width:1200px;margin:20px auto 0;font-size:14px;}
 
-.common_list_con{width:1200px;border:1px solid #dddddd;border-top:2px solid #00bc6f;margin:10px auto 0;background-color:#f7f7f7;position:relative;}
+.common_list_con{width:1200px;border:1px solid #dddddd;border-top:2px solid #f41443;margin:10px auto 0;background-color:#f7f7f7;position:relative;}
 
 .common_list_con dl{margin:20px;}
 .common_list_con dt{font-size:14px;font-weight:bold;margin-bottom:10px}
 .common_list_con dd input{vertical-align:bottom;margin-right:10px}
 
-.edit_site{position:absolute; right:20px;top:30px;width:100px;height:30px;background-color:#37ab40;text-align:center;line-height:30px;color:#fff}
+.edit_site{position:absolute; right:20px;top:30px;width:100px;height:30px;background-color:#f41443;text-align:center;line-height:30px;color:#fff}
 
 .pay_style_con{margin:20px;}
 .pay_style_con input{float:left;margin:14px 7px 0 0;}
@@ -422,7 +422,7 @@ html,body{height:100%}
 .goods_list_th .col05{width:15%}
 
 .goods_list_td{height:80px;border-bottom:1px solid #eeeded}
-.goods_list_td li{float:left;line-height:80px;text-align:center;}
+.goods_list_td li{float:left;line-height:20px;text-align:center;}
 .goods_list_td .col01{width:4%}
 .goods_list_td .col02{width:6%}
 .goods_list_td .col03{width:15%}
@@ -441,7 +441,7 @@ html,body{height:100%}
 .total_goods_count em,.total_goods_count b,.transit b,.total_pay b{font-size:14px;color:#ff4200;padding:0 5px;}
 
 .order_submit{width:1200px;margin:20px auto;}
-.order_submit a{width:160px;height:40px;line-height:40px;text-align:center;background-color:#47aa34;color:#fff;font-size:16px;display:block;float:right}
+.order_submit a{width:160px;height:40px;line-height:40px;text-align:center;background-color:#f41443;color:#fff;font-size:16px;display:block;float:right}
 
 
 .order_list_th{width:1198px;border:1px solid #ddd;background-color:#f7f7f7;margin:20px auto 0;}
@@ -475,7 +475,7 @@ html,body{height:100%}
 .oper_btn{display:inline-block;border:1px solid #ddd;color:#666;padding:5px 10px}
 
 .popup_con{display:none;}
-.popup{width:300px;height:150px;border:1px solid #dddddd;border-top:2px solid #00bc6f;background-color:#f7f7f7;position:fixed;
+.popup{width:300px;height:150px;border:1px solid #dddddd;border-top:2px solid #f41443;background-color:#f7f7f7;position:fixed;
 	left:50%;
 	margin-left:-150px;
 	top:50%;

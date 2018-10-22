@@ -13,6 +13,6 @@ public interface IShippingService {
 
 	ServerResponse deleteAll(String ids);
 
-	List<Shipping> selectByUserId(Integer id);
+	List<Shipping> selectByUserId(Integer userId);
 
 }

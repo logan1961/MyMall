@@ -366,7 +366,7 @@
 		</form>
 	</div>
 	</div>
-	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
+ 	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
 	<script type="text/javascript" src="${ctx}/static/lib/layui/layui.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/util.js"></script>
@@ -452,8 +452,8 @@
 		
 		//更新购物车总价格
 		function refreshTotalPrice(){
-			var checkboxs = $("input[name=selectCheckbox]:checked");
 			var totalPrice = 0.00;
+			var checkboxs = $("input[name=selectCheckbox]:checked");
 			for(var i = 0; i < checkboxs.length;i++){
 				var checkboxId = checkboxs[i].getAttribute("id");
 				//原形式checkbox111,截出id
@@ -478,7 +478,7 @@
 					title : "登录",
 					offset : "50px",
 					area : ['400px','450px'],
-					content : $('#loginForm')
+					content : $("#loginForm")
 				});
 			} else {//用户已经登录，直接跳转生成订单界面
 				window.location.href="${ctx}/order/getOrderPage.shtml";

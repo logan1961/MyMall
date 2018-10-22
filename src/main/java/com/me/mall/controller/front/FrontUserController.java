@@ -17,6 +17,11 @@ public class FrontUserController {
 	@Autowired
 	private IUserService UserService;
 	
+	@RequestMapping("/getLoginPage.shtml")
+	public String getLoginPage(){
+		return "/user/login";
+	}
+	
 	@RequestMapping("/login.shtml")
 	@ResponseBody
 	public ServerResponse login(String username,Integer password,HttpSession session){
