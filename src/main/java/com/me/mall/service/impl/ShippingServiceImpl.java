@@ -63,4 +63,9 @@ public class ShippingServiceImpl implements IShippingService{
 				}
 	}
 
+	@Override
+	public List<Shipping> selectByUserId(Integer id) {
+		return null;
+	}
+
 }

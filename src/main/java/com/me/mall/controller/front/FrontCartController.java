@@ -1,41 +1,28 @@
 package com.me.mall.controller.front;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.me.mall.common.ServerResponse;
+import com.me.mall.constant.MallConstant;
 import com.me.mall.entity.Product;
 import com.me.mall.service.IProductService;
+import com.me.mall.util.CartUtil;
 import com.me.mall.vo.CartItemVO;
 import com.me.mall.vo.CartVO;
 
 @Controller
 @RequestMapping("/cart")
 public class FrontCartController {
-	// 设置到Cookie中购物车的名字
-	private final String CART_COOKIE = "cart_cookie";
-	// 购物车选中状态
-	private final Integer CART_CHECKED = 1;
-	// 购物车未选中状态
-	private final Integer CART_UNCHECKED = 0;
 	
 	@Autowired
 	private IProductService productService;
@@ -49,7 +36,7 @@ public class FrontCartController {
 	@RequestMapping("/getCartPage.shtml")
 	public String getCartPage(HttpServletRequest request, Model model) {
 		// 将Cookie里面购物车转换成CartVO这个对象
-		CartVO cartVO = getCartVOFromCookie(request);
+		CartVO cartVO = CartUtil.getCartVOFromCookie(request);
 		if (null != cartVO) {//购物车存在
 			List<CartItemVO> cartItemVOList = cartVO.getCartItemVOList();
 			// CartItemVO里面的Product只有id，我们要在购物车页面展示商品的详细信息，
@@ -77,7 +64,7 @@ public class FrontCartController {
 	public ServerResponse addOrUpdateCart(Integer productId, Integer amount, Integer isChecked, 
 			HttpServletRequest request, HttpServletResponse response) {
 		// 1、将Cookie里面的购物车转换为CartVO对象(类似于从数据库里面取出所有)
-		CartVO cartVO = getCartVOFromCookie(request);
+		CartVO cartVO = CartUtil.getCartVOFromCookie(request);
 		if (null == cartVO) {
 			cartVO = new CartVO();
 		}
@@ -109,7 +96,7 @@ public class FrontCartController {
 					// 将是否选中的状态修改为选中状态isChecked=1
 					cartItemVO.setIsChecked(isChecked);
 				}
-				setCartVOToCookie(cartVO, response);
+				CartUtil.setCartVOToCookie(cartVO, response);
 				return ServerResponse.createSuccess("更新成功");
 			}
 		}
@@ -122,13 +109,13 @@ public class FrontCartController {
 			prod.setId(productId);
 			cartItemVO.setProduct(prod);
 			cartItemVO.setAmount(amount);
-			cartItemVO.setIsChecked(CART_CHECKED);
+			cartItemVO.setIsChecked(MallConstant.CART_CHECKED);
 			
 			cartItemVOList.add(cartItemVO);
 		}
 				
 		// 3、将CartVO对象设置到Cookie（类似于将所有数据写到数据库中）
-		setCartVOToCookie(cartVO, response);
+		CartUtil.setCartVOToCookie(cartVO, response);
 		return ServerResponse.createSuccess("添加购物车成功");
 	}
 	
@@ -145,7 +132,7 @@ public class FrontCartController {
 			,HttpServletRequest request
 			,HttpServletResponse response){
 		//将cookie中地购物车转换为CartVO对象
-		CartVO cartVO = getCartVOFromCookie(request);
+		CartVO cartVO = CartUtil.getCartVOFromCookie(request);
 		if (null == cartVO) {
 			return ServerResponse.createError("获取购物车失败");
 		}
@@ -162,7 +149,7 @@ public class FrontCartController {
 		}
 		
 		//将cartVO对象写到cookie中
-		setCartVOToCookie(cartVO, response);
+		CartUtil.setCartVOToCookie(cartVO, response);
 		return ServerResponse.createSuccess("删除购物车成功");
 	}
 	
@@ -209,76 +196,11 @@ public class FrontCartController {
 			prod.setId(productId);
 			cartItemVO.setProduct(prod);
 			cartItemVO.setAmount(amount);
-			cartItemVO.setIsChecked(CART_CHECKED);
+			cartItemVO.setIsChecked(MallConstant.CART_CHECKED);
 			
 			cartItemVOList.add(cartItemVO);
 		}
 		return true;
 	}
 
-	/**
-	 * 将Cookie中的购物车信息转换为CartVO对象
-	 * 
-	 * @param request
-	 * @return
-	 */
-	private CartVO getCartVOFromCookie(HttpServletRequest request) {
-		CartVO cartVO = null;
-		ObjectMapper objectMapper = new ObjectMapper();
-		// 只有对象中不为null才转换
-		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		// 将客户端中购物车cookie拿出来
-		Cookie[] cookies = request.getCookies();
-		if (null != cookies && cookies.length != 0) {
-			for (Cookie cookie : cookies) {
-				if (CART_COOKIE.equals(cookie.getName())) {
-					// 找到了客户端cookie中购物车信息
-					// "{\"cartItemVOList\":[{\"product\":{\"id\":278},\"amount\":10,\"isChecked\":1},{\"product\":{\"id\":183},\"amount\":2,\"isChecked\":0}]}"
-					String value = cookie.getValue();
-					try {
-						// 将json字符串转换为Java对象
-						cartVO = objectMapper.readValue(value,CartVO.class);
-					} catch (JsonParseException e) {
-						e.printStackTrace();
-					} catch (JsonMappingException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		return cartVO;
-	}
-
-	/**
-	 * 将CartVO对象设置到Cookie中
-	 * @param response
-	 * @param cartVO
-	 */
-	private void setCartVOToCookie(CartVO cartVO, HttpServletResponse response) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		// 只有对象中不为null才转换
-		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		// 将cartVo对象以json形式放到cookie
-		StringWriter stringWriter = new StringWriter();
-		try {
-			objectMapper.writeValue(stringWriter, cartVO);
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// 将购物车json放到cookie
-		Cookie cookie = new Cookie(CART_COOKIE, stringWriter.toString());
-		// 设置cookie的存储时间
-		cookie.setMaxAge(60 * 60 * 24);// 单位秒
-		// 设置cookie路径
-		cookie.setPath("/");
-		// 将cookie发送到浏览器
-		response.addCookie(cookie);
-	}
-	
 }
