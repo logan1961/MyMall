@@ -1,5 +1,7 @@
 package com.me.mall.controller.front;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,11 @@ public class FrontProductController {
 	private IProductService productService;
 	
 	@RequestMapping("/getProductListPage.shtml")
-	public String getProductListPage(){
-		return "";
+	public String getProductListPage(Integer categoryId,Model model){
+		//根据分类id查询该类商品列表
+		List<Product> productList = productService.getProductListById(categoryId);
+		model.addAttribute("productList",productList);
+		return "/product/product_list";
 	}
 	
 	/**

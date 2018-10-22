@@ -21,4 +21,6 @@ public interface IProductService {
 
 	ServerResponse update(Product product);
 
+	List<Product> getProductListById(Integer categoryId);
+
 }

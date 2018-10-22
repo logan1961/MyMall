@@ -114,12 +114,12 @@
 				<div class="nav_left">
 					<c:forEach items="${topCategoryList}" var="topCategory">
 						<span>
-							${topCategory.name }
+							${topCategory.name}
 						</span>
 						<c:forEach items="${secondCategoryList}" var="secondCategory">
 							<c:if test="${secondCategory.parentId == topCategory.id}">
 								<p>
-									<a href="">${secondCategory.name}</a>
+									<a href="${ctx}/product/getProductListPage.shtml?categoryId=${secondCategory.id}">${secondCategory.name}</a>
 								</p>
 							</c:if>
 						</c:forEach>

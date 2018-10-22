@@ -54,7 +54,7 @@ html,body{height:100%}
 }
 
 .guest_cart .cart_name{
-	width:158px;height:38px;line-height:38px;border:1px solid #dddddd;display:block;background:url(../images/icons.png) 13px -300px no-repeat;font-size:14px;color:#37ab40;text-indent:56px;
+	width:158px;height:38px;line-height:38px;border:1px solid #dddddd;display:block;background:url(../images/icons.png) 13px -300px no-repeat;font-size:14px;color:#f41443;text-indent:56px;
 }
 
 .guest_cart .goods_count{
@@ -65,9 +65,9 @@ html,body{height:100%}
 
 /* 菜单、幻灯片样式 */
 
-.navbar_con{height:40px;border-bottom:2px solid #39a93e}
+.navbar_con{height:40px;border-bottom:2px solid #f41443}
 .navbar{width:1200px;margin:0 auto;}
-.navbar h1{width:200px;height:40px;line-height:40px;text-align: center;font-size:14px;color:#fff;background-color:#39a93e;}
+.navbar h1{width:200px;height:40px;line-height:40px;text-align: center;font-size:14px;color:#fff;background-color:#f41443;}
 
 .navbar .subnav_con{width:200px;height:40px;background-color:#39a93e;position:relative;cursor:pointer;}
 
@@ -160,7 +160,7 @@ html,body{height:100%}
 .breadcrumb{
 	width:1200px;height:40px;margin:0 auto;
 }
-.breadcrumb a{line-height:40px;color:#37ab40}
+.breadcrumb a{line-height:40px;color:#f41443}
 .breadcrumb a:hover{color:#ff8800}
 .breadcrumb span{line-height:40px;color:#666;padding:0 5px;}
 
@@ -174,7 +174,7 @@ html,body{height:100%}
 
 .new_goods{
 	border:1px solid #ededed;
-	border-top:2px solid #37ab40;
+	border-top:2px solid #f41443;
 	padding-bottom:10px;
 }
 
@@ -195,7 +195,7 @@ html,body{height:100%}
 
 .sort_bar{height:30px;background-color:#f0fdec}
 .sort_bar a{display:block;height:30px;line-height:30px;padding:0 20px;float:left;color:#000}
-.sort_bar .active{background-color:#37ab40;color:#fff;}
+.sort_bar .active{background-color:#f41443;color:#fff;}
 
 
 .goods_type_list{

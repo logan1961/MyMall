@@ -102,4 +102,13 @@ public class ProductServiceImpl implements IProductService{
 		}
 	}
 
+	/**
+	 * 根据分类id查询商品列表
+	 */
+	@Override
+	public List<Product> getProductListById(Integer categoryId) {
+		
+		return productMapper.getProductListById(categoryId);
+	}
+
 }

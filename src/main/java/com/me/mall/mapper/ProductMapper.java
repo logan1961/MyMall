@@ -58,4 +58,6 @@ public interface ProductMapper {
 	int deleteAll(String[] idArray);
 
 	List<Product> pageList(Product product);
+
+	List<Product> getProductListById(Integer categoryId);
 }

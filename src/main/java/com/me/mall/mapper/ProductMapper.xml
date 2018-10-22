@@ -241,4 +241,11 @@
   		#{id}
   	</foreach>
   </delete>
+  
+  <!-- 根据分类id查询商品列表 -->
+  <select id="getProductListById" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from product
+  	where category_id = #{categoryId}
+  </select>
 </mapper>
