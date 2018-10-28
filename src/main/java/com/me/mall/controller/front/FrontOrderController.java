@@ -1,11 +1,11 @@
 package com.me.mall.controller.front;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,14 +19,15 @@ import com.me.mall.common.ServerResponse;
 import com.me.mall.constant.MallConstant;
 import com.me.mall.entity.Cart;
 import com.me.mall.entity.Order;
+import com.me.mall.entity.OrderItem;
 import com.me.mall.entity.Product;
 import com.me.mall.entity.Shipping;
 import com.me.mall.entity.User;
 import com.me.mall.service.ICartService;
+import com.me.mall.service.IOrderItemService;
 import com.me.mall.service.IOrderService;
 import com.me.mall.service.IProductService;
 import com.me.mall.service.IShippingService;
-import com.me.mall.util.CartUtil;
 import com.me.mall.vo.CartItemVO;
 import com.me.mall.vo.CartVO;
 
@@ -41,6 +42,8 @@ public class FrontOrderController {
 	private IOrderService orderService;
 	@Autowired
 	private ICartService cartService;
+	@Autowired
+	private IOrderItemService orderItemService;
 	
 	/**
 	 * 获得订单界面
@@ -58,7 +61,7 @@ public class FrontOrderController {
 		List<CartItemVO> cartItemVOList = new ArrayList<>();
 		for (Cart cart : carts) {
 			//只展示选中状态的商品
-			if (cart.getChecked() == 1) {
+			if (cart.getChecked() == MallConstant.CART_CHECKED) {
 				//获得商品信息
 				Product product = productService.findById(cart.getProductId());
 				CartItemVO cartItemVO = new CartItemVO();
@@ -72,6 +75,7 @@ public class FrontOrderController {
 		cartVO.setCartItemVOList(cartItemVOList);
 		model.addAttribute("cartVO", cartVO);
 		return "/order/order";
+		
 		//cookie方法:用户登陆后仍保存在cookie
 		/*CartItemVO cartItemVO = new CartItemVO();
 		CartVO cartVO = CartUtil.getCartVOFromCookie(request);
@@ -99,9 +103,57 @@ public class FrontOrderController {
 	 */
 	@RequestMapping("/addOrder.shtml")
 	@ResponseBody
-	public ServerResponse addOrder(Integer shippingId){
+	public ServerResponse addOrder(Integer shippingId,HttpSession session,BigDecimal payment,HttpServletRequest request){
+		//1、添加到数据库order表
+		//从session中拿到user对象
+		User user = (User) session.getAttribute(MallConstant.SESSION_USER);
 		//创建订单对象order
 		Order order = new Order();
-		return ServerResponse.createSuccess();
+		//生成订单编号
+		Date date = new Date();
+		SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String orderNo = pattern.format(date);
+		Long orderNoLong = Long.parseLong(orderNo);//格式转换
+		
+		order.setOrderNo(orderNoLong);//设置订单编号
+		order.setUserId(user.getId());//设置user ID
+		order.setShippingId(shippingId);//设置设置收获地址id
+		order.setPayment(payment);//设置付款金额
+		order.setPostage(0);//设置运费
+		order.setStatus(10);//设置付款状态
+		
+		//添加到数据库order表
+		orderService.add(order);
+
+		//2、添加到数据库orderItem表
+		List<Cart> carts = cartService.findCartByUserId(user.getId());
+		for (Cart cart : carts) {
+			if (cart.getChecked() == MallConstant.CART_CHECKED) {
+				OrderItem orderItem = new OrderItem();
+				Product product = productService.findById(cart.getProductId());
+				
+				orderItem.setOrderNo(order.getOrderNo());//设置订单编号
+				orderItem.setUserId(user.getId());//设置 user ID
+				orderItem.setProductId(cart.getProductId());//设置商品ID
+				orderItem.setProductName(product.getName());//设置商品名称
+				orderItem.setProductImage(product.getMainImage());//设置商品主图
+				orderItem.setCurrentUnitPrice(product.getPrice());//设置商品单价
+				orderItem.setQuantity(cart.getQuantity());//设置商品订单数量
+				//设置商品的总价格
+				BigDecimal amount = new BigDecimal(cart.getQuantity().toString());//类型不匹配，需要转换成decimal类型
+				BigDecimal totalPrice = product.getPrice().multiply(amount);//相乘
+				orderItem.setTotalPrice(totalPrice);
+				
+				//添加到数据库orderItem表
+				orderItemService.add(orderItem);
+			}
+		}
+		return ServerResponse.createSuccess("提交订单成功");
+	}
+	
+	@RequestMapping("/getUserOrderPage.shtml")
+	public String getUserOrderPage(){
+		
+		return "index";
 	}
 }

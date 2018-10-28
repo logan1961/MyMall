@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<title>天天生鲜-提交订单</title>
+	<title>乐购商城-提交订单</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/front/CSS/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/front/CSS/main.css"/>
 </head>
@@ -47,7 +47,7 @@
 				<dl>
 					<dt>寄送到：</dt>
 					<c:forEach items="${shippings}" var="shipping">
-						<dd><input type="radio" name="" checked="checked"/>${shipping.receiverProvince}省&nbsp;&nbsp;&nbsp;&nbsp; ${shipping.receiverCity}市&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverDistrict}&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverAddress}&nbsp;&nbsp;&nbsp;&nbsp;(${shipping.receiverName}&nbsp;收)&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverMobile}</dd>
+						<dd><input id="shippingId" type="radio" name="" checked="checked"/>${shipping.receiverProvince}省&nbsp;&nbsp;&nbsp;&nbsp; ${shipping.receiverCity}市&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverDistrict}&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverAddress}&nbsp;&nbsp;&nbsp;&nbsp;(${shipping.receiverName}&nbsp;收)&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverMobile}</dd>
 					</c:forEach>
 				</dl>
 				<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
@@ -98,7 +98,7 @@
 	</div>
 
 	<div class="order_submit clearfix">
-		<a href="javascript:;" id="order_btn">提交订单</a>
+		<a href="javascript:;" id="order_btn" onclick="addOrder()">提交订单</a>
 	</div>	
 
 	<div class="footer">
@@ -166,6 +166,30 @@
 			}
 			$("#totalPrice").html("￥" + totalPrice);
 			$("#totalPrice2").html("￥" + totalPrice);
+		}
+		
+		//提交订单
+		function addOrder(){
+			//拿到订单的id
+			var shippingId = $("#shippingId").val();
+			//拿到实付款的总金额
+			var payment = $("#totalPrice2").html();
+			//拿到每一项的金额
+			var totalPrice = $("price").val();
+			console.log(totalPrice);
+			$.ajax({
+				url : "addOrder.shtml",
+				type : "POST",
+				data : {"shippingId": shippingId,"payment" : payment},
+				dataType : "json",
+				success : function(resp){
+					if(resp.code == util.SUCCESS){
+						location.href = "getUserOrderPage.shtml";
+					} else {
+						mylayer.errorMsg(resp.msg);
+					}
+				}
+			});
 		}
 	</script>
 </body>
