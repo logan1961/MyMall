@@ -1,5 +1,7 @@
 package com.me.mall.mapper;
 
+import java.util.List;
+
 import com.me.mall.entity.Cart;
 
 public interface CartMapper {
@@ -50,4 +52,6 @@ public interface CartMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Cart record);
+
+	List<Cart> findCartByUserId(Integer id);
 }

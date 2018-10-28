@@ -157,7 +157,6 @@ public class FrontCartController {
 	 * 将商品添加到购物车的CartVO中
 	 * TODO: 可以加上异常情况的判断，例如：1、商品已经下架 2、库存不够
 	 * 这些情况都应该返回添加购物车失败
-	 * 
 	 * @param cartVO
 	 * @param productId
 	 * @param amount

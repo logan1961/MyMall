@@ -901,7 +901,7 @@ input {
 	float: right;
 }
 .right_big .big_img{
-	float: right;
+	/* float: right; */
 	margin-top: 20px;
 	margin-left:20px;
 	margin-right: 174px;

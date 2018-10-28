@@ -28,7 +28,7 @@ var mylayer = {
 	successUrl : function(contents, url) {
 		layer.msg(
 			contents,
-			{icon:1, time:3000},
+			{icon:1, time:1000},
 			function() {//msg消失之后触发的函数
 				location.href = url;
 			}

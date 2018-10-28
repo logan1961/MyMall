@@ -50,8 +50,8 @@
       quantity, checked, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
-      #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(), 
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.me.mall.entity.Cart" >
     <!--
@@ -148,4 +148,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!--  -->
+  <select id="findCartByUserId" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from cart
+  	where user_id = #{userId}
+  </select>
 </mapper>

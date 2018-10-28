@@ -334,7 +334,6 @@
 	</body>
 	
 	<!-- 登录弹窗界面 -->
-	<div class="banner">
 	  <div class="login" style="display:none" id="loginForm">
 		<form id="login-form">
 			<ul>
@@ -364,7 +363,6 @@
 				</li>
 			</ul>
 		</form>
-	</div>
 	</div>
  	<script type="text/javascript" src="${ctx}/static/lib/jquery/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${ctx}/static/common/mylayer.js"></script>
