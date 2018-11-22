@@ -111,7 +111,7 @@ public class FrontOrderController {
 		Order order = new Order();
 		//生成订单编号
 		Date date = new Date();
-		SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat pattern = new SimpleDateFormat("yyyyMMddHHmmss");
 		String orderNo = pattern.format(date);
 		Long orderNoLong = Long.parseLong(orderNo);//格式转换
 		
@@ -120,7 +120,7 @@ public class FrontOrderController {
 		order.setShippingId(shippingId);//设置设置收获地址id
 		order.setPayment(payment);//设置付款金额
 		order.setPostage(0);//设置运费
-		order.setStatus(10);//设置付款状态
+		order.setStatus(20);//设置付款状态(已付款)
 		
 		//添加到数据库order表
 		orderService.add(order);
@@ -151,9 +151,13 @@ public class FrontOrderController {
 		return ServerResponse.createSuccess("提交订单成功");
 	}
 	
+	/**
+	 * 订单展示界面
+	 * @return
+	 */
 	@RequestMapping("/getUserOrderPage.shtml")
 	public String getUserOrderPage(){
 		
-		return "index";
+		return "/order/user_order";
 	}
 }

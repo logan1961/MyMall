@@ -47,7 +47,8 @@
 				<dl>
 					<dt>寄送到：</dt>
 					<c:forEach items="${shippings}" var="shipping">
-						<dd><input id="shippingId" type="radio" name="" checked="checked"/>${shipping.receiverProvince}省&nbsp;&nbsp;&nbsp;&nbsp; ${shipping.receiverCity}市&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverDistrict}&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverAddress}&nbsp;&nbsp;&nbsp;&nbsp;(${shipping.receiverName}&nbsp;收)&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverMobile}</dd>
+						<input id="shippingId" type="hidden" value="${shipping.id}"/>
+						<dd><input type="radio" name="" checked="checked"/>${shipping.receiverProvince}省&nbsp;&nbsp;&nbsp;&nbsp; ${shipping.receiverCity}市&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverDistrict}&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverAddress}&nbsp;&nbsp;&nbsp;&nbsp;(${shipping.receiverName}&nbsp;收)&nbsp;&nbsp;&nbsp;&nbsp;${shipping.receiverMobile}</dd>
 					</c:forEach>
 				</dl>
 				<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
@@ -93,7 +94,7 @@
 		<div class="settle_con">
 			<div class="total_goods_count">共<em>${cartVO.cartItemVOList.size()}</em>件商品，总金额<b id="totalPrice"></b></div>
 			<div class="transit">运费：<b>0元</b></div>
-			<div class="total_pay">实付款：<b id="totalPrice2">￥</b></div>
+			<div class="total_pay">实付款：<b>￥</b><b id="totalPrice2"></b></div>
 		</div>
 	</div>
 
@@ -165,7 +166,7 @@
 				console.log(totalPrice);
 			}
 			$("#totalPrice").html("￥" + totalPrice);
-			$("#totalPrice2").html("￥" + totalPrice);
+			$("#totalPrice2").html(totalPrice);
 		}
 		
 		//提交订单
